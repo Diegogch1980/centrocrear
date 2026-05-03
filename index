@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CREAR · Centro de Rehabilitación, Diagnóstico y Apoyo a la Integración Escolar</title>
+  <meta name="description" content="CREAR es un Centro SAIE de rehabilitación, diagnóstico y servicio de apoyo a la integración escolar en Monte Grande. Evaluaciones integrales, tratamientos y orientación." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ──────────────────────────────────────────────── */
+    :root {
+      --teal:    #3AAFA8;
+      --teal-dk: #2E8C86;
+      --yellow:  #EBC55A;
+      --orange:  #F07A40;
+      --dark:    #1E2A35;
+      --mid:     #4A5568;
+      --light:   #F7FAFA;
+      --white:   #FFFFFF;
+      --radius:  16px;
+      --shadow:  0 8px 32px rgba(58,175,168,.15);
+      --font:    'Nunito', sans-serif;
+    }
+
+    /* ── RESET ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--dark); background: var(--white); line-height: 1.65; overflow-x: hidden; }
+    img  { max-width: 100%; display: block; }
+    a    { text-decoration: none; color: inherit; }
+
+    /* ── UTILITY ─────────────────────────────────────────────── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+    .section    { padding: 80px 0; }
+    .section--light { background: var(--light); }
+    .badge {
+      display: inline-block;
+      background: rgba(58,175,168,.12);
+      color: var(--teal-dk);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    h2.section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    p.section-lead {
+      font-size: 1rem;
+      color: var(--mid);
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 100px;
+      font-family: var(--font);
+      font-size: .92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s, background .2s;
+      border: none;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.18); }
+    .btn--primary  { background: var(--teal); color: var(--white); }
+    .btn--primary:hover { background: var(--teal-dk); }
+    .btn--outline  { background: transparent; color: var(--teal); border: 2px solid var(--teal); }
+    .btn--whatsapp { background: #25D366; color: var(--white); }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(58,175,168,.12);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .nav__logo img {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+    .nav__logo-sub {
+      font-size: .58rem;
+      font-weight: 600;
+      color: var(--mid);
+      line-height: 1.35;
+      max-width: 200px;
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav__links a {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--mid);
+      transition: color .2s;
+    }
+    .nav__links a:hover { color: var(--teal); }
+    .nav__cta { display: flex; gap: 10px; flex-shrink: 0; }
+    .nav__burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav__burger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: .3s;
+    }
+    /* Mobile nav drawer */
+    .nav__drawer {
+      display: none;
+      flex-direction: column;
+      background: var(--white);
+      border-top: 1px solid rgba(58,175,168,.1);
+      padding: 16px 20px 20px;
+      gap: 4px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.1);
+    }
+    .nav__drawer.is-open { display: flex; }
+    .nav__drawer a {
+      display: block;
+      padding: 10px 12px;
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--mid);
+      border-radius: 10px;
+      transition: background .15s, color .15s;
+    }
+    .nav__drawer a:hover { background: rgba(58,175,168,.08); color: var(--teal); }
+    .nav__drawer-cta {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(58,175,168,.1);
+    }
+    .nav__drawer-cta .btn { flex: 1; justify-content: center; }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #F0FFFE 0%, #FFF8EE 60%, #FFF5F2 100%);
+      padding: 88px 0 0;
+      overflow: hidden;
+    }
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(58,175,168,.1);
+      color: var(--teal-dk);
+      font-size: .78rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+    }
+    .hero__label::before {
+      content: '';
+      display: block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+    .hero__title {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+    .hero__title em { font-style: normal; color: var(--teal); }
+    .hero__desc {
+      font-size: 1rem;
+      color: var(--mid);
+      margin-bottom: 28px;
+      max-width: 480px;
+    }
+    .hero__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero__visual  { position: relative; display: flex; justify-content: center; }
+    .hero__card-wrap { position: relative; width: 100%; max-width: 420px; }
+    .hero__img-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(58,175,168,.2);
+      aspect-ratio: 4/3;
+    }
+    .hero__img-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .hero__float {
+      position: absolute;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      font-size: .8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero__float--tl { top: -14px; left: -14px; color: var(--teal); }
+    .hero__float--br { bottom: -14px; right: -14px; color: var(--orange); }
+    .hero__float .icon { font-size: 1.2rem; }
+    .wave-divider { line-height: 0; }
+    .wave-divider svg { display: block; width: 100%; }
+    .dot-decoration {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .1;
+      pointer-events: none;
+    }
+
+    /* ── SERVICES ────────────────────────────────────────────── */
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      border-top: 4px solid transparent;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .service-card:nth-child(1) { border-top-color: var(--teal); }
+    .service-card:nth-child(2) { border-top-color: var(--orange); }
+    .service-card:nth-child(3) { border-top-color: var(--yellow); }
+    .service-card:nth-child(4) { border-top-color: var(--yellow); }
+    .service-card:nth-child(5) { border-top-color: var(--teal); }
+    .service-card:nth-child(6) { border-top-color: var(--orange); }
+    .service-card__icon {
+      width: 52px; height: 52px;
+      border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    .service-card:nth-child(1) .service-card__icon { background: rgba(58,175,168,.1); }
+    .service-card:nth-child(2) .service-card__icon { background: rgba(240,122,64,.1); }
+    .service-card:nth-child(3) .service-card__icon { background: rgba(235,197,90,.1); }
+    .service-card:nth-child(4) .service-card__icon { background: rgba(235,197,90,.1); }
+    .service-card:nth-child(5) .service-card__icon { background: rgba(58,175,168,.1); }
+    .service-card:nth-child(6) .service-card__icon { background: rgba(240,122,64,.1); }
+    .service-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .service-card p  { font-size: .86rem; color: var(--mid); line-height: 1.6; }
+
+    /* ── ABOUT ───────────────────────────────────────────────── */
+    .about__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .about__visual { position: relative; }
+    .about__img {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 56px rgba(58,175,168,.18);
+    }
+    .about__img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+    .about__blob {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      opacity: .16;
+      z-index: -1;
+    }
+    .about__list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .about__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .93rem;
+      color: var(--mid);
+    }
+    .about__list li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: var(--white);
+      font-size: .7rem;
+      font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+
+    /* ── MISIÓN / VISIÓN ─────────────────────────────────────── */
+    .mv__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .mv__card {
+      border-radius: 24px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mv__card--mision { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dk) 100%); color: var(--white); }
+    .mv__card--vision { background: linear-gradient(135deg, var(--orange) 0%, #D96530 100%); color: var(--white); }
+    .mv__card__label {
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .7;
+      margin-bottom: 8px;
+    }
+    .mv__card h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 14px; }
+    .mv__card p  { font-size: .93rem; line-height: 1.75; opacity: .9; }
+    .mv__deco  {
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      bottom: -60px; right: -60px;
+      pointer-events: none;
+    }
+    .mv__deco2 {
+      position: absolute;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      top: -30px; left: -30px;
+      pointer-events: none;
+    }
+
+    /* ── WHY US ──────────────────────────────────────────────── */
+    .why__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .why__features { display: flex; flex-direction: column; gap: 18px; }
+    .why__feat { display: flex; gap: 16px; align-items: flex-start; }
+    .why__feat-icon {
+      flex-shrink: 0;
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .why__feat:nth-child(1) .why__feat-icon { background: rgba(58,175,168,.12); }
+    .why__feat:nth-child(2) .why__feat-icon { background: rgba(240,122,64,.12); }
+    .why__feat:nth-child(3) .why__feat-icon { background: rgba(235,197,90,.12); }
+    .why__feat:nth-child(4) .why__feat-icon { background: rgba(58,175,168,.12); }
+    .why__feat-body h4 { font-size: .93rem; font-weight: 800; margin-bottom: 4px; }
+    .why__feat-body p  { font-size: .84rem; color: var(--mid); }
+    .why__visual {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dk) 100%);
+      border-radius: 24px;
+      padding: 44px 38px;
+      color: var(--white);
+    }
+    .why__visual h3 { font-size: 1.45rem; font-weight: 900; margin-bottom: 8px; }
+    .why__visual > p { font-size: .9rem; opacity: .82; margin-bottom: 26px; }
+    .why__values { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .why__value {
+      background: rgba(255,255,255,.1);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+    .why__value .v-icon { font-size: 1.7rem; margin-bottom: 7px; display: block; }
+    .why__value strong  { display: block; font-size: .93rem; font-weight: 800; color: var(--yellow); }
+    .why__value span    { font-size: .73rem; opacity: .8; }
+
+    /* ── EVALUACIONES ────────────────────────────────────────── */
+    .eval__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .eval__item {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 18px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.05);
+      transition: transform .2s;
+    }
+    .eval__item:hover { transform: translateY(-4px); }
+    .eval__item .icon { font-size: 2rem; margin-bottom: 10px; }
+    .eval__item h4 { font-size: .88rem; font-weight: 700; color: var(--dark); }
+
+    /* ── CONTACT ─────────────────────────────────────────────── */
+    .contact__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .contact__info { display: flex; flex-direction: column; gap: 20px; }
+    .contact__item { display: flex; gap: 16px; align-items: flex-start; }
+    .contact__item-icon {
+      flex-shrink: 0;
+      width: 48px; height: 48px;
+      border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact__item-icon svg { width: 24px; height: 24px; }
+    .contact__item-icon--wa   { background: #25D366; }
+    .contact__item-icon--ig   { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .contact__item-icon--loc  { background: var(--teal); }
+    .contact__item-icon--time { background: var(--orange); }
+    .contact__item-body strong { display: block; font-size: .83rem; font-weight: 700; color: var(--teal); margin-bottom: 2px; }
+    .contact__item-body span   { font-size: .93rem; color: var(--dark); }
+    .contact__form {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.08);
+    }
+    .contact__form h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 20px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: .8rem; font-weight: 700; color: var(--mid); margin-bottom: 5px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: .9rem;
+      color: var(--dark);
+      background: var(--white);
+      transition: border-color .2s;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--teal); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ── MAPA ────────────────────────────────────────────────── */
+    .map__wrapper {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,.1);
+      height: 420px;
+    }
+    .map__wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
+    .map__info {
+      display: flex;
+      gap: 28px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+    .map__info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .88rem;
+      color: var(--mid);
+    }
+    .map__info-item strong { color: var(--dark); font-weight: 700; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.68);
+      padding: 52px 0 24px;
+    }
+    .footer__inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 36px;
+      margin-bottom: 44px;
+    }
+    .footer__logo-img {
+      display: inline-block;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 8px 14px;
+      margin-bottom: 14px;
+    }
+    .footer__logo-img img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+    .footer__desc { font-size: .83rem; line-height: 1.7; max-width: 230px; margin-bottom: 18px; }
+    .footer__social { display: flex; gap: 10px; }
+    .footer__social a {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .footer__social a svg { width: 17px; height: 17px; }
+    .footer__social a:hover { background: var(--teal); }
+    .footer__col h4 {
+      font-size: .83rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .footer__col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer__col ul a { font-size: .83rem; transition: color .2s; }
+    .footer__col ul a:hover { color: var(--teal); }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .78rem;
+    }
+
+    /* ── FLOATING WA ─────────────────────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      background: #25D366;
+      color: var(--white);
+      border-radius: 100px;
+      padding: 13px 18px 13px 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: .86rem;
+      font-weight: 700;
+      box-shadow: 0 8px 28px rgba(37,211,102,.45);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-float:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(37,211,102,.55); }
+    .wa-float svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .wa-float__text { display: block; }
+
+    /* ── RRHH ────────────────────────────────────────────────── */
+    .rrhh {
+      background: linear-gradient(135deg, #F0FFFE 0%, #FFF8EE 100%);
+    }
+    .rrhh__inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .rrhh__info { padding-top: 8px; }
+    .rrhh__perks { display: flex; flex-direction: column; gap: 16px; margin: 28px 0 32px; }
+    .rrhh__perk  { display: flex; align-items: flex-start; gap: 14px; }
+    .rrhh__perk-icon {
+      flex-shrink: 0;
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .rrhh__perk:nth-child(1) .rrhh__perk-icon { background: rgba(58,175,168,.12); }
+    .rrhh__perk:nth-child(2) .rrhh__perk-icon { background: rgba(240,122,64,.12); }
+    .rrhh__perk:nth-child(3) .rrhh__perk-icon { background: rgba(235,197,90,.12); }
+    .rrhh__perk-body h4 { font-size: .92rem; font-weight: 800; margin-bottom: 3px; }
+    .rrhh__perk-body p  { font-size: .84rem; color: var(--mid); }
+
+    .rrhh__form-wrap {
+      background: var(--white);
+      border-radius: 22px;
+      padding: 36px 32px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.08);
+    }
+    .rrhh__form-wrap h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 20px; }
+
+    .cv-upload {
+      border: 2px dashed rgba(58,175,168,.35);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      position: relative;
+    }
+    .cv-upload:hover { border-color: var(--teal); background: rgba(58,175,168,.04); }
+    .cv-upload input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .cv-upload__icon  { font-size: 1.8rem; margin-bottom: 6px; }
+    .cv-upload__text  { font-size: .85rem; font-weight: 700; color: var(--teal); }
+    .cv-upload__sub   { font-size: .75rem; color: var(--mid); margin-top: 2px; }
+    .cv-upload__name  { font-size: .82rem; font-weight: 700; color: var(--teal-dk); margin-top: 6px; display: none; }
+
+    .rrhh__note {
+      background: rgba(58,175,168,.08);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 14px;
+      font-size: .82rem;
+      color: var(--mid);
+      line-height: 1.5;
+      margin: 14px 0 18px;
+    }
+    .rrhh__note strong { color: var(--teal-dk); }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .services__grid { grid-template-columns: repeat(2, 1fr); }
+      .eval__grid     { grid-template-columns: repeat(2, 1fr); }
+      .footer__inner  { grid-template-columns: 1fr 1fr; gap: 28px; }
+    }
+
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav__links { display: none; }
+      .nav__burger { display: flex; }
+      .nav__logo-sub { display: none; }
+
+      /* Sections */
+      .section { padding: 52px 0; }
+      p.section-lead { margin-bottom: 32px; }
+
+      /* Hero */
+      .hero { padding: 60px 0 0; }
+      .hero__inner { grid-template-columns: 1fr; }
+      .hero__visual { display: none; }
+      .hero__title { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+      .hero__actions { gap: 10px; }
+
+      /* About */
+      .about__inner { grid-template-columns: 1fr; gap: 32px; }
+      .about__visual {
+        display: block;
+        max-width: 360px;
+        margin: 0 auto;
+      }
+      .about__img img { aspect-ratio: 16/9; }
+
+      /* Why */
+      .why__inner { grid-template-columns: 1fr; gap: 32px; }
+
+      /* Mission / Vision */
+      .mv__grid { grid-template-columns: 1fr; gap: 20px; }
+      .mv__card { padding: 32px 28px; }
+
+      /* Evaluaciones */
+      .eval__grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* Contact */
+      .contact__inner { grid-template-columns: 1fr; gap: 40px; }
+      /* RRHH */
+      .rrhh__inner    { grid-template-columns: 1fr; gap: 32px; }
+      .rrhh__form-wrap { padding: 24px 20px; }
+      .contact__form  { padding: 24px 20px; }
+      .form-row       { grid-template-columns: 1fr; }
+
+      /* Map */
+      .map__wrapper { height: 300px; }
+      .map__info    { gap: 14px; flex-direction: column; }
+
+      /* Footer */
+      .footer__inner { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+      /* WhatsApp float — icon only on very small */
+      .wa-float__text { display: none; }
+      .wa-float { padding: 14px; border-radius: 50%; }
+    }
+
+    @media (max-width: 480px) {
+      .services__grid { grid-template-columns: 1fr; }
+      .eval__grid     { grid-template-columns: 1fr; }
+      .footer__inner  { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .hero__title    { font-size: clamp(1.75rem, 8vw, 2.2rem); }
+      .mv__card       { padding: 28px 22px; }
+      .mv__card h3    { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#inicio" class="nav__logo">
+          <img src="img/logo.png" alt="CREAR – Centro SAIE" />
+          <div class="nav__logo-sub">Centro de Rehabilitación, Diagnóstico y Servicio de Apoyo a la Integración Escolar</div>
+        </a>
+
+        <ul class="nav__links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#evaluaciones">Evaluaciones</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+
+
+        <button class="nav__burger" aria-label="Abrir menú" id="burgerBtn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile drawer -->
+    <div class="nav__drawer" id="navDrawer">
+      <a href="#inicio"       onclick="closeNav()">Inicio</a>
+      <a href="#servicios"    onclick="closeNav()">Servicios</a>
+      <a href="#nosotros"     onclick="closeNav()">Nosotros</a>
+      <a href="#evaluaciones" onclick="closeNav()">Evaluaciones</a>
+      <a href="#ubicacion"    onclick="closeNav()">Ubicación</a>
+      <a href="#contacto"     onclick="closeNav()">Contacto</a>
+      <a href="#rrhh"         onclick="closeNav()">Trabajá con nosotros</a>
+      <div class="nav__drawer-cta">
+        <a href="https://wa.me/5491158517587" target="_blank" class="btn btn--whatsapp" style="width:100%;justify-content:center;" onclick="closeNav()">
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════ -->
+  <section class="hero" id="inicio">
+    <div class="dot-decoration" style="width:300px;height:300px;background:var(--teal);top:-80px;right:-80px;"></div>
+    <div class="dot-decoration" style="width:160px;height:160px;background:var(--yellow);bottom:100px;left:-50px;"></div>
+
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="hero__label">Centro SAIE · Monte Grande, Bs. As.</div>
+          <h1 class="hero__title">
+            Acompañamos el<br>
+            <em>desarrollo integral</em><br>
+            de cada niño
+          </h1>
+          <p class="hero__desc">
+            Somos un centro de rehabilitación, diagnóstico y apoyo a la integración escolar.
+            Brindamos atención personalizada con un equipo interdisciplinario comprometido.
+          </p>
+          <div class="hero__actions">
+            <a href="https://wa.me/5491158517587" target="_blank" class="btn btn--primary">
+              💬 Consultar turno
+            </a>
+            <a href="#servicios" class="btn btn--outline">Ver servicios</a>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero__card-wrap">
+            <div class="hero__img-frame">
+              <img src="img/WhatsApp Image 2026-05-01 at 19.48.35.jpeg" alt="Centro CREAR" />
+            </div>
+            <div class="hero__float hero__float--tl">
+              <span class="icon">🏥</span> Centro SAIE
+            </div>
+            <div class="hero__float hero__float--br">
+              <span class="icon">❤️</span> Atención integral
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wave-divider" style="margin-top:64px;">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#F7FAFA"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══ SERVICIOS ═════════════════════════════════════════════ -->
+  <section class="section section--light" id="servicios">
+    <div class="container">
+      <div class="badge">Nuestros servicios</div>
+      <h2 class="section-title">Todo lo que necesitás,<br>en un solo lugar</h2>
+      <p class="section-lead">
+        Ofrecemos un servicio integral para acompañar el crecimiento,
+        el aprendizaje y la inclusión de cada niño.
+      </p>
+
+      <div class="services__grid">
+        <div class="service-card">
+          <div class="service-card__icon">🏫</div>
+          <h3>Apoyo a la Integración Escolar</h3>
+          <p>Servicio SAIE para acompañar al niño dentro del aula y coordinar con los docentes un proyecto educativo inclusivo.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">🧠</div>
+          <h3>Neuropsicología</h3>
+          <p>Evaluación y diagnóstico del funcionamiento cognitivo, atencional y ejecutivo para orientar tratamientos específicos.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">🗣️</div>
+          <h3>Fonoaudiología</h3>
+          <p>Evaluación e intervención en lenguaje, habla y comunicación para potenciar la expresión de cada paciente.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">🤝</div>
+          <h3>Trabajo Social</h3>
+          <p>Articulación con instituciones y acompañamiento en procesos de inclusión social y educativa.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">💆</div>
+          <h3>Tratamientos Integrales</h3>
+          <p>Propuestas terapéuticas individualizadas que integran distintas disciplinas para un abordaje completo.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">👨‍👩‍👧</div>
+          <h3>Orientación</h3>
+          <p>Espacios de acompañamiento y orientación para padres y cuidadores en cada etapa del proceso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" style="background:var(--light);">
+    <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- ══ NOSOTROS ═══════════════════════════════════════════════ -->
+  <section class="section" id="nosotros">
+    <div class="container">
+      <div class="about__inner">
+        <div class="about__visual">
+          <div class="about__img">
+            <img src="img/WhatsApp Image 2026-05-01 at 19.48.36.jpeg" alt="Interior del centro CREAR" />
+          </div>
+          <div class="about__blob"></div>
+        </div>
+
+        <div>
+          <div class="badge">Quiénes somos</div>
+          <h2 class="section-title">Un equipo comprometido<br>con cada historia</h2>
+          <p style="font-size:.93rem;color:var(--mid);margin-bottom:22px;">
+            En CREAR creemos que cada niño es único. Por eso construimos proyectos terapéuticos
+            personalizados, articulando distintas disciplinas y trabajando de la mano con
+            cada núcleo familiar y sus escuelas.
+          </p>
+          <ul class="about__list">
+            <li>Equipo interdisciplinario con experiencia clínica y educativa</li>
+            <li>Espacios cálidos, pensados para el bienestar de cada niño</li>
+            <li>Articulación continua con docentes, directivos y obra social</li>
+            <li>Actualización permanente en los últimos avances en neurociencias</li>
+            <li>Atención personalizada desde el primer contacto</li>
+          </ul>
+          <a href="#contacto" class="btn btn--primary">Conocernos →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MISIÓN / VISIÓN ═══════════════════════════════════════ -->
+  <section class="section section--light" id="mision">
+    <div class="container">
+      <div class="badge">Identidad institucional</div>
+      <h2 class="section-title">Misión y Visión</h2>
+      <p class="section-lead">Los principios que orientan nuestro trabajo cada día.</p>
+
+      <div class="mv__grid">
+        <div class="mv__card mv__card--mision">
+          <div class="mv__deco2"></div>
+          <div class="mv__card__label">Misión</div>
+          <h3>Nuestro propósito</h3>
+          <p>
+            Somos un espacio terapéutico y educativo que acompaña a niños, niñas y adolescentes
+            en sus procesos de desarrollo e integración, creando oportunidades de aprendizaje,
+            inclusión y crecimiento, respetando los tiempos, la singularidad y el contexto
+            de cada persona.
+          </p>
+          <div class="mv__deco"></div>
+        </div>
+
+        <div class="mv__card mv__card--vision">
+          <div class="mv__deco2"></div>
+          <div class="mv__card__label">Visión</div>
+          <h3>Hacia dónde vamos</h3>
+          <p>
+            Ser un centro de referencia en integración escolar y acompañamiento terapéutico,
+            reconocido por su mirada integral, su compromiso ético y su capacidad de crear
+            procesos de inclusión sostenibles y significativos junto a las instituciones educativas.
+          </p>
+          <div class="mv__deco"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" style="background:var(--light);">
+    <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,20 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- ══ POR QUÉ CREAR ══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="why__inner">
+        <div>
+          <div class="badge">Por qué elegirnos</div>
+          <h2 class="section-title">Una atención diferente,<br>centrada en la persona</h2>
+          <p class="section-lead">Integramos diagnóstico, tratamiento e inclusión escolar en un solo lugar.</p>
+
+          <div class="why__features">
+            <div class="why__feat">
+              <div class="why__feat-icon">🎯</div>
+              <div class="why__feat-body">
+                <h4>Enfoque integral</h4>
+                <p>Evaluamos y tratamos al niño en todas sus dimensiones: cognitiva, emocional, social y educativa.</p>
+              </div>
+            </div>
+            <div class="why__feat">
+              <div class="why__feat-icon">🔬</div>
+              <div class="why__feat-body">
+                <h4>Diagnóstico preciso</h4>
+                <p>Utilizamos herramientas estandarizadas internacionalmente: ADIS, AID-R, evaluaciones neuropsicológicas y neurológicas.</p>
+              </div>
+            </div>
+            <div class="why__feat">
+              <div class="why__feat-icon">🏫</div>
+              <div class="why__feat-body">
+                <h4>Articulación escolar</h4>
+                <p>Trabajamos en red con los establecimientos educativos para garantizar una inclusión real y sostenida.</p>
+              </div>
+            </div>
+            <div class="why__feat">
+              <div class="why__feat-icon">💛</div>
+              <div class="why__feat-body">
+                <h4>Calidez humana</h4>
+                <p>Cada consulta encuentra en CREAR un espacio de escucha, respeto y acompañamiento genuino.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="why__visual">
+          <h3>Nuestros pilares</h3>
+          <p>Los valores que guían cada decisión y cada acompañamiento</p>
+          <div class="why__values">
+            <div class="why__value">
+              <span class="v-icon">🎯</span>
+              <strong>Compromiso</strong>
+              <span>Con cada proceso</span>
+            </div>
+            <div class="why__value">
+              <span class="v-icon">🤝</span>
+              <strong>Equipo</strong>
+              <span>Interdisciplinario</span>
+            </div>
+            <div class="why__value">
+              <span class="v-icon">🏫</span>
+              <strong>Inclusión</strong>
+              <span>Real y sostenida</span>
+            </div>
+            <div class="why__value">
+              <span class="v-icon">💛</span>
+              <strong>Calidez</strong>
+              <span>En cada encuentro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EVALUACIONES ═══════════════════════════════════════════ -->
+  <section class="section section--light" id="evaluaciones">
+    <div class="container">
+      <div class="badge">Diagnóstico</div>
+      <h2 class="section-title">Evaluaciones Integrales</h2>
+      <p class="section-lead">
+        Contamos con protocolos de evaluación actualizados para un diagnóstico preciso
+        y orientado a la intervención.
+      </p>
+      <div class="eval__grid">
+        <div class="eval__item">
+          <div class="icon">🧩</div>
+          <h4>Evaluación Neuropsicológica</h4>
+        </div>
+        <div class="eval__item">
+          <div class="icon">🔍</div>
+          <h4>Evaluación Neurológica</h4>
+        </div>
+        <div class="eval__item">
+          <div class="icon">🗣️</div>
+          <h4>Evaluación Fonoaudiológica</h4>
+        </div>
+        <div class="eval__item">
+          <div class="icon">📋</div>
+          <h4>ADIS · AID-R</h4>
+        </div>
+        <div class="eval__item">
+          <div class="icon">📚</div>
+          <h4>Aprendizaje Escolar</h4>
+        </div>
+        <div class="eval__item">
+          <div class="icon">💬</div>
+          <h4>Comunicación y Lenguaje</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" style="background:var(--light);">
+    <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <!-- ══ CONTACTO ═══════════════════════════════════════════════ -->
+  <section class="section" id="contacto">
+    <div class="container">
+      <div class="badge">Contacto</div>
+      <h2 class="section-title">Estamos para ayudarte</h2>
+      <p class="section-lead">
+        Completá el formulario o escribinos por WhatsApp. Te respondemos a la brevedad.
+      </p>
+
+      <div class="contact__inner">
+        <div class="contact__info">
+
+          <!-- WhatsApp -->
+          <div class="contact__item">
+            <div class="contact__item-icon contact__item-icon--wa">
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+            </div>
+            <div class="contact__item-body">
+              <strong>WhatsApp / Teléfono</strong>
+              <span>11 5851-7587</span>
+            </div>
+          </div>
+
+          <!-- Instagram -->
+          <div class="contact__item">
+            <div class="contact__item-icon contact__item-icon--ig">
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </div>
+            <div class="contact__item-body">
+              <strong>Instagram</strong>
+              <span>@Crear.saie</span>
+            </div>
+          </div>
+
+          <!-- Dirección -->
+          <div class="contact__item">
+            <div class="contact__item-icon contact__item-icon--loc">
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </div>
+            <div class="contact__item-body">
+              <strong>Dirección</strong>
+              <span>Nuestras Malvinas 258, Monte Grande</span>
+            </div>
+          </div>
+
+          <!-- Horario -->
+          <div class="contact__item">
+            <div class="contact__item-icon contact__item-icon--time">
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+              </svg>
+            </div>
+            <div class="contact__item-body">
+              <strong>Horario de atención</strong>
+              <span>Lunes a viernes · 9:00 – 20:00 h</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="contact__form">
+          <h3>Consultá por un turno</h3>
+          <form onsubmit="handleForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" placeholder="Tu nombre" required />
+              </div>
+              <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" placeholder="Tu apellido" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Teléfono / WhatsApp</label>
+              <input type="tel" placeholder="11 xxxx-xxxx" required />
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" placeholder="tucorreo@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Servicio de interés</label>
+              <select>
+                <option value="">Seleccioná una opción</option>
+                <option>Apoyo a la integración escolar (SAIE)</option>
+                <option>Evaluación neuropsicológica</option>
+                <option>Evaluación neurológica</option>
+                <option>Evaluación fonoaudiológica</option>
+                <option>ADIS / AID-R</option>
+                <option>Trabajo social</option>
+                <option>Orientación</option>
+                <option>Tratamiento integral</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Mensaje (opcional)</label>
+              <textarea placeholder="Contanos brevemente el motivo de la consulta…"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">
+              Enviar consulta →
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MAPA ══════════════════════════════════════════════════ -->
+  <section class="section section--light" id="ubicacion">
+    <div class="container">
+      <div class="badge">Dónde estamos</div>
+      <h2 class="section-title">Encontranos en Monte Grande</h2>
+      <p class="section-lead">
+        Nuestras Malvinas 258, Monte Grande · Partido de Esteban Echeverría, Buenos Aires.
+      </p>
+
+      <div class="map__wrapper">
+        <iframe
+          src="https://maps.google.com/maps?q=Nuestras+Malvinas+258,+Monte+Grande,+Buenos+Aires,+Argentina&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación CREAR – Nuestras Malvinas 258, Monte Grande">
+        </iframe>
+      </div>
+
+      <div class="map__info">
+        <div class="map__info-item">
+          📍 <span><strong>Nuestras Malvinas 258</strong> · Monte Grande, Bs. As.</span>
+        </div>
+        <div class="map__info-item">
+          📱 <span><strong>11 5851-7587</strong></span>
+        </div>
+        <div class="map__info-item">
+          🕐 <span><strong>Lunes a viernes</strong> · 9:00 – 20:00 h</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RRHH ════════════════════════════════════════════════════ -->
+  <section class="section rrhh" id="rrhh">
+    <div class="container">
+      <div class="rrhh__inner">
+
+        <div class="rrhh__info">
+          <div class="badge">Sumate al equipo</div>
+          <h2 class="section-title">Trabajá en<br><em style="font-style:normal;color:var(--teal);">CREAR</em></h2>
+          <p style="font-size:.95rem;color:var(--mid);">
+            Buscamos profesionales y acompañantes terapéuticos comprometidos con la inclusión
+            y el desarrollo de niños, niñas y adolescentes.
+          </p>
+
+          <div class="rrhh__perks">
+            <div class="rrhh__perk">
+              <div class="rrhh__perk-icon">🤝</div>
+              <div class="rrhh__perk-body">
+                <h4>Equipo interdisciplinario</h4>
+                <p>Trabajo colaborativo con profesionales de distintas áreas en un clima de respeto y crecimiento.</p>
+              </div>
+            </div>
+            <div class="rrhh__perk">
+              <div class="rrhh__perk-icon">📚</div>
+              <div class="rrhh__perk-body">
+                <h4>Formación continua</h4>
+                <p>Espacios de supervisión, capacitación y actualización permanente.</p>
+              </div>
+            </div>
+            <div class="rrhh__perk">
+              <div class="rrhh__perk-icon">💛</div>
+              <div class="rrhh__perk-body">
+                <h4>Propósito real</h4>
+                <p>Cada día trabajás generando un impacto genuino en la vida de cada niño y su entorno.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rrhh__form-wrap">
+          <h3>Dejanos tu postulación</h3>
+          <form onsubmit="handleRRHH(event)" id="rrhhForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" id="rNombre" placeholder="Tu nombre" required />
+              </div>
+              <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" id="rApellido" placeholder="Tu apellido" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Teléfono / WhatsApp</label>
+                <input type="tel" id="rTel" placeholder="11 xxxx-xxxx" required />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="rEmail" placeholder="tu@email.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Rol al que te postulás</label>
+              <select id="rCargo" required>
+                <option value="">Seleccioná una opción</option>
+                <option>Acompañante Terapéutico/a (AT)</option>
+                <option>Psicólogo/a</option>
+                <option>Fonoaudiólogo/a</option>
+                <option>Trabajador/a Social</option>
+                <option>Neuropsicólogo/a</option>
+                <option>Maestro/a Integrador/a</option>
+                <option>Otro / Consulta espontánea</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Contanos sobre vos (opcional)</label>
+              <textarea id="rMsg" placeholder="Experiencia, formación, disponibilidad horaria…" style="min-height:80px;"></textarea>
+            </div>
+
+            <!-- CV Upload -->
+            <div class="form-group">
+              <label>CV (PDF, Word o imagen)</label>
+              <div class="cv-upload" id="cvUpload">
+                <input type="file" id="rCV" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="showFileName(this)" />
+                <div class="cv-upload__icon">📄</div>
+                <div class="cv-upload__text">Seleccioná tu CV</div>
+                <div class="cv-upload__sub">PDF, Word o imagen · Máx. 10 MB</div>
+                <div class="cv-upload__name" id="cvName"></div>
+              </div>
+            </div>
+
+            <div class="rrhh__note">
+              <strong>¿Cómo funciona?</strong> Al enviar, se abrirá WhatsApp con tus datos.
+              Adjuntá tu CV directamente en ese chat — WhatsApp permite enviar archivos.
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">
+              Enviar postulación →
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">
+          <div class="footer__logo-img">
+            <img src="img/logo.png" alt="CREAR" />
+          </div>
+          <p class="footer__desc">
+            Centro de Rehabilitación, Diagnóstico y Servicio de Apoyo a la Integración Escolar.<br>
+            Centro SAIE · Monte Grande, Buenos Aires.
+          </p>
+          <div class="footer__social">
+            <!-- Instagram -->
+            <a href="https://instagram.com/crear.saie" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="white">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/5491158517587" target="_blank" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="white">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#servicios">Integración Escolar</a></li>
+            <li><a href="#servicios">Neuropsicología</a></li>
+            <li><a href="#servicios">Fonoaudiología</a></li>
+            <li><a href="#servicios">Trabajo Social</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Evaluaciones</h4>
+          <ul>
+            <li><a href="#evaluaciones">Neuropsicológica</a></li>
+            <li><a href="#evaluaciones">Neurológica</a></li>
+            <li><a href="#evaluaciones">Fonoaudiológica</a></li>
+            <li><a href="#evaluaciones">ADIS / AID-R</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="tel:1158517587">11 5851-7587</a></li>
+            <li><a href="https://instagram.com/crear.saie" target="_blank">@Crear.saie</a></li>
+            <li><a href="#ubicacion">Nuestras Malvinas 258</a></li>
+            <li><a href="#contacto">Consultar turno</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2026 CREAR Centro SAIE · Todos los derechos reservados</span>
+        <span>Monte Grande, Buenos Aires</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══ WHATSAPP FLOTANTE ══════════════════════════════════════ -->
+  <a class="wa-float" href="https://wa.me/5491158517587?text=Hola%2C%20quisiera%20consultar%20por%20un%20turno%20en%20CREAR" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+    <span class="wa-float__text">Consultá por WhatsApp</span>
+  </a>
+
+  <script>
+    // Mobile nav
+    const burgerBtn = document.getElementById('burgerBtn');
+    const navDrawer = document.getElementById('navDrawer');
+    burgerBtn.addEventListener('click', () => {
+      navDrawer.classList.toggle('is-open');
+    });
+    function closeNav() {
+      navDrawer.classList.remove('is-open');
+    }
+
+    // CV file name display
+    function showFileName(input) {
+      const label = document.getElementById('cvName');
+      if (input.files && input.files[0]) {
+        label.textContent = '✓ ' + input.files[0].name;
+        label.style.display = 'block';
+        document.getElementById('cvUpload').style.borderColor = 'var(--teal)';
+        document.getElementById('cvUpload').style.background  = 'rgba(58,175,168,.06)';
+      }
+    }
+
+    // RRHH → WhatsApp
+    function handleRRHH(e) {
+      e.preventDefault();
+      const nombre  = document.getElementById('rNombre').value;
+      const apellido= document.getElementById('rApellido').value;
+      const tel     = document.getElementById('rTel').value;
+      const email   = document.getElementById('rEmail').value;
+      const cargo   = document.getElementById('rCargo').value;
+      const msg     = document.getElementById('rMsg').value;
+      const cvInput = document.getElementById('rCV');
+      const cvFile  = cvInput.files[0];
+
+      let texto = `Hola! Me llamo ${nombre} ${apellido} y quisiera postularme como ${cargo}.\n`;
+      texto += `📱 Tel: ${tel}\n📧 Email: ${email}\n`;
+      if (msg) texto += `\n💬 ${msg}\n`;
+      if (cvFile) texto += `\n📎 Te adjunto mi CV: ${cvFile.name}`;
+
+      window.open(`https://wa.me/5491158517587?text=${encodeURIComponent(texto)}`, '_blank');
+    }
+
+    // Form → WhatsApp
+    function handleForm(e) {
+      e.preventDefault();
+      const form    = e.target;
+      const name    = form.querySelectorAll('input[type="text"]')[0].value;
+      const phone   = form.querySelector('input[type="tel"]').value;
+      const service = form.querySelector('select').value || 'consulta general';
+      const msg = encodeURIComponent(
+        `Hola! Soy ${name}, quisiera consultar sobre: ${service}. Mi teléfono es ${phone}.`
+      );
+      window.open(`https://wa.me/5491158517587?text=${msg}`, '_blank');
+    }
+
+    // Nav active highlight
+    const sections   = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav__links a');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navAnchors.forEach(a => a.style.color = '');
+          const active = document.querySelector(`.nav__links a[href="#${entry.target.id}"]`);
+          if (active) active.style.color = 'var(--teal)';
+        }
+      });
+    }, { threshold: 0.35 });
+    sections.forEach(s => io.observe(s));
+  </script>
+
+</body>
+</html>
