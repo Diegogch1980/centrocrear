@@ -614,48 +614,43 @@
     .rrhh__perk-body h4 { font-size: .92rem; font-weight: 800; margin-bottom: 3px; }
     .rrhh__perk-body p  { font-size: .84rem; color: var(--mid); }
 
-    .rrhh__form-wrap {
+    .rrhh__cta-card {
       background: var(--white);
-      border-radius: 22px;
-      padding: 36px 32px;
+      border-radius: 24px;
+      padding: 48px 40px;
       box-shadow: 0 8px 40px rgba(0,0,0,.08);
-    }
-    .rrhh__form-wrap h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 20px; }
-
-    .cv-upload {
-      border: 2px dashed rgba(58,175,168,.35);
-      border-radius: 12px;
-      padding: 20px 16px;
       text-align: center;
-      cursor: pointer;
-      transition: border-color .2s, background .2s;
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
-    .cv-upload:hover { border-color: var(--teal); background: rgba(58,175,168,.04); }
-    .cv-upload input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
+    .rrhh__cta-icon {
+      font-size: 3rem;
+      line-height: 1;
     }
-    .cv-upload__icon  { font-size: 1.8rem; margin-bottom: 6px; }
-    .cv-upload__text  { font-size: .85rem; font-weight: 700; color: var(--teal); }
-    .cv-upload__sub   { font-size: .75rem; color: var(--mid); margin-top: 2px; }
-    .cv-upload__name  { font-size: .82rem; font-weight: 700; color: var(--teal-dk); margin-top: 6px; display: none; }
-
-    .rrhh__note {
-      background: rgba(58,175,168,.08);
-      border-left: 3px solid var(--teal);
-      border-radius: 0 10px 10px 0;
-      padding: 12px 14px;
-      font-size: .82rem;
+    .rrhh__cta-card h3 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--dark);
+    }
+    .rrhh__cta-card > p {
+      font-size: .95rem;
       color: var(--mid);
-      line-height: 1.5;
-      margin: 14px 0 18px;
+      max-width: 340px;
+      line-height: 1.6;
     }
-    .rrhh__note strong { color: var(--teal-dk); }
+    .rrhh__cta-btn {
+      margin-top: 8px;
+      padding: 16px 36px;
+      font-size: 1rem;
+    }
+    .rrhh__cta-note {
+      font-size: .78rem !important;
+      color: var(--mid) !important;
+      opacity: .75;
+      margin-top: -4px;
+    }
 
     /* ── RESPONSIVE ──────────────────────────────────────────── */
     @media (max-width: 1024px) {
@@ -704,7 +699,7 @@
       .contact__inner { grid-template-columns: 1fr; gap: 40px; }
       /* RRHH */
       .rrhh__inner    { grid-template-columns: 1fr; gap: 32px; }
-      .rrhh__form-wrap { padding: 24px 20px; }
+      .rrhh__cta-card { padding: 36px 24px; }
       .contact__form  { padding: 24px 20px; }
       .form-row       { grid-template-columns: 1fr; }
 
@@ -1110,7 +1105,7 @@
             </div>
             <div class="contact__item-body">
               <strong>Dirección</strong>
-              <span>Nuestras Malvinas 258, Monte Grande</span>
+              <span>Nuestras Malvinas 256, Monte Grande</span>
             </div>
           </div>
 
@@ -1183,22 +1178,22 @@
       <div class="badge">Dónde estamos</div>
       <h2 class="section-title">Encontranos en Monte Grande</h2>
       <p class="section-lead">
-        Nuestras Malvinas 258, Monte Grande · Partido de Esteban Echeverría, Buenos Aires.
+        Nuestras Malvinas 256, Monte Grande · Partido de Esteban Echeverría, Buenos Aires.
       </p>
 
       <div class="map__wrapper">
         <iframe
-          src="https://maps.google.com/maps?q=Nuestras+Malvinas+258,+Monte+Grande,+Buenos+Aires,+Argentina&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          src="https://maps.google.com/maps?q=Nuestras+Malvinas+256,+Monte+Grande,+Buenos+Aires,+Argentina&t=&z=16&ie=UTF8&iwloc=&output=embed"
           allowfullscreen
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicación CREAR – Nuestras Malvinas 258, Monte Grande">
+          title="Ubicación CREAR – Nuestras Malvinas 6, Monte Grande">
         </iframe>
       </div>
 
       <div class="map__info">
         <div class="map__info-item">
-          📍 <span><strong>Nuestras Malvinas 258</strong> · Monte Grande, Bs. As.</span>
+          📍 <span><strong>Nuestras Malvinas 256</strong> · Monte Grande, Bs. As.</span>
         </div>
         <div class="map__info-item">
           📱 <span><strong>11 5851-7587</strong></span>
@@ -1248,68 +1243,14 @@
           </div>
         </div>
 
-        <div class="rrhh__form-wrap">
-          <h3>Dejanos tu postulación</h3>
-          <form onsubmit="handleRRHH(event)" id="rrhhForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" id="rNombre" placeholder="Tu nombre" required />
-              </div>
-              <div class="form-group">
-                <label>Apellido</label>
-                <input type="text" id="rApellido" placeholder="Tu apellido" required />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Teléfono / WhatsApp</label>
-                <input type="tel" id="rTel" placeholder="11 xxxx-xxxx" required />
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="rEmail" placeholder="tu@email.com" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Rol al que te postulás</label>
-              <select id="rCargo" required>
-                <option value="">Seleccioná una opción</option>
-                <option>Acompañante Terapéutico/a (AT)</option>
-                <option>Psicólogo/a</option>
-                <option>Fonoaudiólogo/a</option>
-                <option>Trabajador/a Social</option>
-                <option>Neuropsicólogo/a</option>
-                <option>Maestro/a Integrador/a</option>
-                <option>Otro / Consulta espontánea</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Contanos sobre vos (opcional)</label>
-              <textarea id="rMsg" placeholder="Experiencia, formación, disponibilidad horaria…" style="min-height:80px;"></textarea>
-            </div>
-
-            <!-- CV Upload -->
-            <div class="form-group">
-              <label>CV (PDF, Word o imagen)</label>
-              <div class="cv-upload" id="cvUpload">
-                <input type="file" id="rCV" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="showFileName(this)" />
-                <div class="cv-upload__icon">📄</div>
-                <div class="cv-upload__text">Seleccioná tu CV</div>
-                <div class="cv-upload__sub">PDF, Word o imagen · Máx. 10 MB</div>
-                <div class="cv-upload__name" id="cvName"></div>
-              </div>
-            </div>
-
-            <div class="rrhh__note">
-              <strong>¿Cómo funciona?</strong> Al enviar, se abrirá WhatsApp con tus datos.
-              Adjuntá tu CV directamente en ese chat — WhatsApp permite enviar archivos.
-            </div>
-
-            <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">
-              Enviar postulación →
-            </button>
-          </form>
+        <div class="rrhh__cta-card">
+          <div class="rrhh__cta-icon">🚀</div>
+          <h3>¿Querés formar parte?</h3>
+          <p>Completá el formulario de postulación con tus datos y experiencia. Es rápido y sencillo.</p>
+          <a href="https://forms.gle/GzM63LCG36WDSvth7" target="_blank" class="btn btn--primary rrhh__cta-btn">
+            Postularme ahora →
+          </a>
+          <p class="rrhh__cta-note">Revisamos todas las postulaciones y te contactamos a la brevedad.</p>
         </div>
 
       </div>
@@ -1369,7 +1310,7 @@
           <ul>
             <li><a href="tel:1158517587">11 5851-7587</a></li>
             <li><a href="https://instagram.com/crear.saie" target="_blank">@Crear.saie</a></li>
-            <li><a href="#ubicacion">Nuestras Malvinas 258</a></li>
+            <li><a href="#ubicacion">Nuestras Malvinas 256</a></li>
             <li><a href="#contacto">Consultar turno</a></li>
           </ul>
         </div>
@@ -1399,37 +1340,6 @@
     });
     function closeNav() {
       navDrawer.classList.remove('is-open');
-    }
-
-    // CV file name display
-    function showFileName(input) {
-      const label = document.getElementById('cvName');
-      if (input.files && input.files[0]) {
-        label.textContent = '✓ ' + input.files[0].name;
-        label.style.display = 'block';
-        document.getElementById('cvUpload').style.borderColor = 'var(--teal)';
-        document.getElementById('cvUpload').style.background  = 'rgba(58,175,168,.06)';
-      }
-    }
-
-    // RRHH → WhatsApp
-    function handleRRHH(e) {
-      e.preventDefault();
-      const nombre  = document.getElementById('rNombre').value;
-      const apellido= document.getElementById('rApellido').value;
-      const tel     = document.getElementById('rTel').value;
-      const email   = document.getElementById('rEmail').value;
-      const cargo   = document.getElementById('rCargo').value;
-      const msg     = document.getElementById('rMsg').value;
-      const cvInput = document.getElementById('rCV');
-      const cvFile  = cvInput.files[0];
-
-      let texto = `Hola! Me llamo ${nombre} ${apellido} y quisiera postularme como ${cargo}.\n`;
-      texto += `📱 Tel: ${tel}\n📧 Email: ${email}\n`;
-      if (msg) texto += `\n💬 ${msg}\n`;
-      if (cvFile) texto += `\n📎 Te adjunto mi CV: ${cvFile.name}`;
-
-      window.open(`https://wa.me/5491158517587?text=${encodeURIComponent(texto)}`, '_blank');
     }
 
     // Form → WhatsApp
