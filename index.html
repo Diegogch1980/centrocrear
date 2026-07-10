@@ -315,9 +315,15 @@
     .service-card {
       position: relative;
       min-height: 165px;
-      perspective: 1400px;
+      perspective: 1800px;
+      perspective-origin: 50% 50%;
       border-radius: 16px;
       outline: none;
+      transition: transform .32s ease;
+    }
+    .service-card:hover,
+    .service-card:focus-within {
+      transform: translateY(-4px);
     }
     .service-card:focus-visible .service-card__face {
       outline: 3px solid rgba(58,175,168,.34);
@@ -329,12 +335,6 @@
       min-height: 165px;
       transform-style: preserve-3d;
       -webkit-transform-style: preserve-3d;
-      transition: transform .9s cubic-bezier(.22, .68, .18, 1);
-      will-change: transform;
-    }
-    .service-card:hover .service-card__inner,
-    .service-card:focus-within .service-card__inner {
-      transform: rotateY(180deg);
     }
     .service-card__face {
       position: absolute;
@@ -352,21 +352,40 @@
       background:
         linear-gradient(120deg, rgba(255,255,255,.32) 0%, rgba(255,255,255,0) 42%),
         linear-gradient(145deg, rgba(58,175,168,.58) 0%, rgba(58,175,168,.22) 58%, rgba(255,255,255,.94) 100%);
+      transform-origin: center center;
+      will-change: transform, opacity;
+      transition:
+        transform 1.15s cubic-bezier(.2, .72, .18, 1),
+        opacity .16s ease,
+        box-shadow .32s ease,
+        border-color .32s ease;
     }
     .service-card__front {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      transform: rotateY(0deg) translateZ(1px);
+      transform: rotateY(0deg);
+      opacity: 1;
     }
     .service-card__back {
-      transform: rotateY(180deg) translateZ(1px);
+      transform: rotateY(-180deg);
       display: flex;
       align-items: center;
+      opacity: 0;
+    }
+    .service-card:hover .service-card__front,
+    .service-card:focus-within .service-card__front {
+      transform: rotateY(180deg);
+      opacity: 0;
+    }
+    .service-card:hover .service-card__back,
+    .service-card:focus-within .service-card__back {
+      transform: rotateY(0deg);
+      opacity: 1;
     }
     .service-card:hover .service-card__face,
     .service-card:focus-within .service-card__face {
-      box-shadow: 0 20px 46px rgba(30,42,53,.12);
+      box-shadow: 0 22px 52px rgba(30,42,53,.14);
     }
     .service-card:nth-child(2) .service-card__face,
     .service-card:nth-child(6) .service-card__face {
