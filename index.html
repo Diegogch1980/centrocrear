@@ -642,6 +642,7 @@
     .contact__form {
       position: relative;
       overflow: hidden;
+      margin-top: -175px;
       background:
         linear-gradient(120deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 42%),
         linear-gradient(145deg, #F07A40 0%, #D96530 58%, #A94922 100%);
@@ -765,6 +766,10 @@
       overflow: hidden;
       box-shadow: 0 8px 32px rgba(0,0,0,.1);
       height: 420px;
+    }
+    .map__lead {
+      max-width: none !important;
+      white-space: nowrap;
     }
     .map__wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
     .map__info {
@@ -977,6 +982,14 @@
       background: #25D366;
       color: var(--white);
     }
+    .brand-modal__btn--ig {
+      background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: var(--white);
+    }
+    .brand-modal__btn--mail {
+      background: var(--teal-dk);
+      color: var(--white);
+    }
 
     /* ── FLOATING WA ─────────────────────────────────────────── */
     .wa-float {
@@ -1143,11 +1156,12 @@
       /* RRHH */
       .rrhh__inner    { grid-template-columns: 1fr; gap: 32px; }
       .rrhh__cta-card { padding: 36px 24px; }
-      .contact__form  { padding: 24px 20px; }
+      .contact__form  { margin-top: 0; padding: 24px 20px; }
       .form-row       { grid-template-columns: 1fr; }
 
       /* Map */
       .map__wrapper { height: 300px; }
+      .map__lead    { white-space: normal; }
       .map__info    { gap: 14px; flex-direction: column; }
 
       /* Footer */
@@ -1254,7 +1268,7 @@
           <div class="service-card__inner">
             <div class="service-card__face service-card__front">
               <div class="service-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 20V7l8-4 8 4v13"></path><path d="M8 20v-6h8v6"></path><path d="M8 10h8"></path><path d="M10 7h4"></path><path d="M3 20h18"></path></svg>
+                <svg viewBox="0 0 24 24"><path d="M4 6.5h6a3 3 0 0 1 3 3V21a3 3 0 0 0-3-3H4z"></path><path d="M20 6.5h-6a3 3 0 0 0-3 3V21a3 3 0 0 1 3-3h6z"></path><path d="M8 10h1"></path><path d="M15 10h1"></path><path d="M7 14h3"></path><path d="M14 14h3"></path></svg>
               </div>
               <h3>Apoyo a la Integración Escolar</h3>
             </div>
@@ -1267,7 +1281,7 @@
           <div class="service-card__inner">
             <div class="service-card__face service-card__front">
               <div class="service-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M9 4h6"></path><path d="M10 2h4l1 2h3v18H6V4h3z"></path><path d="M9 10h6"></path><path d="M9 14h3"></path><circle cx="16.5" cy="16.5" r="2.5"></circle><path d="m18.5 18.5 2.5 2.5"></path></svg>
+                <svg viewBox="0 0 24 24"><path d="M9 3h6l1 2h3v16H5V5h3z"></path><path d="M9 3v3h6V3"></path><path d="M9 11h6"></path><path d="M9 15h3"></path><circle cx="16.5" cy="16.5" r="2.5"></circle><path d="m18.3 18.3 2.2 2.2"></path></svg>
               </div>
               <h3>Evaluaciones de Diagnóstico</h3>
             </div>
@@ -1280,7 +1294,7 @@
           <div class="service-card__inner">
             <div class="service-card__face service-card__front">
               <div class="service-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M7 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M3 21v-2a4 4 0 0 1 8 0v2"></path><path d="M14 8h6"></path><path d="M14 12h5"></path><path d="M14 16h4"></path><path d="M17 20l3-3"></path></svg>
+                <svg viewBox="0 0 24 24"><path d="M7.5 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M3 21v-2a4.5 4.5 0 0 1 9 0v2"></path><path d="M14 7h6"></path><path d="M14 11h5"></path><path d="M14 15h4"></path><path d="M16 20h4"></path><path d="M18 18v4"></path></svg>
               </div>
               <h3>Trabajo Social</h3>
             </div>
@@ -1293,7 +1307,7 @@
           <div class="service-card__inner">
             <div class="service-card__face service-card__front">
               <div class="service-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 21s-6-3.8-6-8.5A4 4 0 0 1 12 9a4 4 0 0 1 6 3.5C18 17.2 12 21 12 21z"></path><path d="M9 14h2l1-3 2 5 1-2h2"></path><path d="M12 3v3"></path><path d="M9 4.5h6"></path></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4.2 4.2 0 0 1 7-3.1A4.2 4.2 0 0 1 19 11c0 5.6-7 10-7 10z"></path><path d="M8 13h3l1-3 2 6 1-3h3"></path><path d="M12 3v3"></path></svg>
               </div>
               <h3>Tratamientos Integrales</h3>
             </div>
@@ -1306,7 +1320,7 @@
           <div class="service-card__inner">
             <div class="service-card__face service-card__front">
               <div class="service-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M16 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M4 21v-2a4 4 0 0 1 8 0v2"></path><path d="M12 21v-2a4 4 0 0 1 8 0v2"></path><path d="M12 13l-2 2"></path><path d="M12 13l2 2"></path></svg>
+                <svg viewBox="0 0 24 24"><path d="M8 10.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M16 10.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M3.5 21v-1.5a4.5 4.5 0 0 1 9 0V21"></path><path d="M11.5 21v-1.5a4.5 4.5 0 0 1 9 0V21"></path><path d="M10 14h4"></path><path d="M12 12v4"></path></svg>
               </div>
               <h3>Orientación a Familias</h3>
             </div>
@@ -1319,7 +1333,7 @@
           <div class="service-card__inner">
             <div class="service-card__face service-card__front">
               <div class="service-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><circle cx="5" cy="6" r="2"></circle><circle cx="19" cy="6" r="2"></circle><circle cx="5" cy="18" r="2"></circle><circle cx="19" cy="18" r="2"></circle><path d="M7 7.5 10 10"></path><path d="m14 10 3-2.5"></path><path d="m10 14-3 2.5"></path><path d="m14 14 3 2.5"></path></svg>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><circle cx="5" cy="7" r="2"></circle><circle cx="19" cy="7" r="2"></circle><circle cx="5" cy="17" r="2"></circle><circle cx="19" cy="17" r="2"></circle><path d="M7 8.2 9.7 10.3"></path><path d="m14.3 10.3 2.7-2.1"></path><path d="m9.7 13.7-2.7 2.1"></path><path d="m14.3 13.7 2.7 2.1"></path></svg>
               </div>
               <h3>Abordaje Interdisciplinario</h3>
             </div>
@@ -1558,7 +1572,6 @@
             <div class="contact__item-body">
               <strong>WhatsApp</strong>
               <span>11 5851-7587</span>
-              <span style="display:block;margin-top:2px;font-size:.9rem;color:var(--mid);">Escribinos por WhatsApp</span>
             </div>
           </div>
 
@@ -1630,7 +1643,7 @@
         </div>
 
         <div class="contact__form">
-          <h3>Estamos para ayudarte</h3>
+          <h3>Escribí tu consulta</h3>
           <form onsubmit="handleForm(event)">
             <div class="form-row">
               <div class="form-group">
@@ -1685,8 +1698,8 @@
     <div class="container">
       <div class="badge">Dónde estamos</div>
       <h2 class="section-title">Encontranos en Monte Grande</h2>
-      <p class="section-lead">
-        Nuestras Malvinas 256, Monte Grande · Partido de Esteban Echeverría, Buenos Aires.
+      <p class="section-lead map__lead">
+        <strong>Nuestras Malvinas 256, Monte Grande · Partido de Esteban Echeverría, Buenos Aires.</strong>
       </p>
 
       <div class="map__wrapper">
@@ -1697,18 +1710,6 @@
           referrerpolicy="no-referrer-when-downgrade"
           title="Ubicación CREAR – Nuestras Malvinas 6, Monte Grande">
         </iframe>
-      </div>
-
-      <div class="map__info">
-        <div class="map__info-item">
-          📍 <span><strong>Nuestras Malvinas 256</strong> · Monte Grande, Bs. As.</span>
-        </div>
-        <div class="map__info-item">
-          📱 <span><strong>11 5851-7587</strong></span>
-        </div>
-        <div class="map__info-item">
-          🕐 <span><strong>Lunes a viernes</strong> · 9:00 – 20:00 h</span>
-        </div>
       </div>
     </div>
   </section>
@@ -1857,11 +1858,17 @@
         Desarrollo web, automatización y herramientas digitales pensadas para equipos de salud.
       </p>
       <div class="brand-modal__actions">
-        <a class="brand-modal__btn brand-modal__btn--web" href="https://gruposolucionasalud.com" target="_blank" rel="noopener noreferrer">
+        <a class="brand-modal__btn brand-modal__btn--web" href="https://gruposolucionasalud.com.ar" target="_blank" rel="noopener noreferrer">
           Ir a la web
         </a>
-        <a class="brand-modal__btn brand-modal__btn--wa" href="https://wa.me/5491158517587?text=Hola%2C%20quisiera%20consultar%20por%20soluciones%20digitales%20para%20salud" target="_blank" rel="noopener noreferrer">
+        <a class="brand-modal__btn brand-modal__btn--wa" href="https://wa.me/5491164631451?text=Hola%2C%20quisiera%20consultar%20por%20soluciones%20digitales%20para%20salud" target="_blank" rel="noopener noreferrer">
           Enviar WhatsApp
+        </a>
+        <a class="brand-modal__btn brand-modal__btn--ig" href="https://instagram.com/grupo.soluciona.salud" target="_blank" rel="noopener noreferrer">
+          @grupo.soluciona.salud
+        </a>
+        <a class="brand-modal__btn brand-modal__btn--mail" href="mailto:info@gruposolucionasalud.com.ar">
+          info@gruposolucionasalud.com.ar
         </a>
       </div>
     </div>
