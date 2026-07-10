@@ -241,6 +241,10 @@
       max-width: 480px;
     }
     .hero__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero__actions .btn {
+      width: 170px;
+      justify-content: center;
+    }
     .hero__actions .btn--outline {
       color: var(--white);
       border-color: rgba(255,255,255,.78);
@@ -476,6 +480,7 @@
     }
     .mv__card h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 14px; }
     .mv__card p  { font-size: 1rem; line-height: 1.75; opacity: .9; }
+    .mv__card p + p { margin-top: 12px; }
     .mv__deco  {
       position: absolute;
       width: 200px; height: 200px;
@@ -513,6 +518,7 @@
     .why__feat:nth-child(2) .why__feat-icon { background: rgba(240,122,64,.12); }
     .why__feat:nth-child(3) .why__feat-icon { background: rgba(235,197,90,.12); }
     .why__feat:nth-child(4) .why__feat-icon { background: rgba(58,175,168,.12); }
+    .why__feat:nth-child(5) .why__feat-icon { background: rgba(30,42,53,.08); }
     .why__feat-body h4 { font-size: .93rem; font-weight: 800; margin-bottom: 4px; }
     .why__feat-body p  { font-size: .93rem; color: var(--mid); }
     .why__visual {
@@ -529,11 +535,11 @@
       border: 1px solid rgba(255,255,255,.18);
       border-radius: 14px;
       padding: 18px 14px;
-      text-align: center;
+      text-align: left;
     }
     .why__value .v-icon { font-size: 1.7rem; margin-bottom: 7px; display: block; }
     .why__value strong  { display: block; font-size: .93rem; font-weight: 850; color: var(--white); }
-    .why__value span    { font-size: .73rem; color: rgba(255,255,255,.82); }
+    .why__value span    { font-size: .78rem; color: rgba(255,255,255,.86); line-height: 1.4; }
 
     /* ── EVALUACIONES ────────────────────────────────────────── */
     .eval__grid {
@@ -625,6 +631,7 @@
     }
     .contact__item-icon svg { width: 24px; height: 24px; }
     .contact__item-icon--wa   { background: #25D366; }
+    .contact__item-icon--mail { background: var(--teal-dk); }
     .contact__item-icon--ig   { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
     .contact__item-icon--loc  { background: var(--teal); }
     .contact__item-icon--time { background: var(--orange); }
@@ -688,6 +695,66 @@
     .contact__form .btn--primary:hover {
       background: #10242B;
       box-shadow: 0 16px 34px rgba(23,49,58,.34);
+    }
+    .form-toast {
+      position: fixed;
+      right: 22px;
+      bottom: 94px;
+      z-index: 220;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: min(360px, calc(100vw - 32px));
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--white);
+      color: var(--dark);
+      border: 1px solid rgba(58,175,168,.22);
+      box-shadow: 0 18px 42px rgba(30,42,53,.18);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px);
+      transition: opacity .22s ease, transform .22s ease;
+      cursor: pointer;
+    }
+    .form-toast.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .form-toast__icon {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(58,175,168,.14);
+      color: var(--teal-dk);
+      font-weight: 900;
+    }
+    .form-toast__title {
+      display: block;
+      font-size: .98rem;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+    .form-toast__text {
+      display: block;
+      font-size: .9rem;
+      color: var(--mid);
+      line-height: 1.4;
+    }
+    .form-toast__close {
+      margin-left: auto;
+      border: none;
+      background: transparent;
+      color: var(--mid);
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0 0 4px 6px;
     }
 
     /* ── MAPA ────────────────────────────────────────────────── */
@@ -1148,10 +1215,10 @@
             Brindamos atención personalizada con un equipo interdisciplinario comprometido.
           </p>
           <div class="hero__actions">
-            <a href="https://wa.me/5491158517587" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
-              💬 Consultar turno
+            <a href="#servicios" class="btn btn--primary">
+              Ver servicios
             </a>
-            <a href="#servicios" class="btn btn--outline">Ver servicios</a>
+            <a href="#nosotros" class="btn btn--outline">Conocé el centro</a>
           </div>
         </div>
       </div>
@@ -1178,38 +1245,31 @@
         </div>
         <div class="service-card">
           <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M9 4a4 4 0 0 0-4 4v1a4 4 0 0 0 0 8v1a3 3 0 0 0 5 2.2"></path><path d="M15 4a4 4 0 0 1 4 4v1a4 4 0 0 1 0 8v1a3 3 0 0 1-5 2.2"></path><path d="M12 5v14"></path><path d="M8 12h8"></path></svg>
+            <svg viewBox="0 0 24 24"><path d="M9 3h6l4 4v14H5V3h4z"></path><path d="M14 3v5h5"></path><path d="M8 13h8"></path><path d="M8 17h5"></path><path d="M9 8h1"></path></svg>
           </div>
-          <h3>Neuropsicología</h3>
-          <p>Evaluación y diagnóstico del funcionamiento cognitivo, atencional y ejecutivo para orientar tratamientos específicos.</p>
+          <h3>Evaluaciones de Diagnóstico</h3>
+          <p>Realizamos evaluaciones diagnósticas integrales para niños, adolescentes y adultos, utilizando herramientas estandarizadas y entrevistas clínicas que permiten comprender el funcionamiento cognitivo, comunicativo, conductual y socioemocional. Los resultados orientan el diagnóstico, la definición de apoyos y la planificación del tratamiento más adecuado.</p>
         </div>
         <div class="service-card">
           <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 16 0"></path><path d="M7 11v2a5 5 0 0 0 10 0v-2"></path><path d="M12 18v3"></path><path d="M9 21h6"></path></svg>
-          </div>
-          <h3>Fonoaudiología</h3>
-          <p>Evaluación e intervención en lenguaje, habla y comunicación para potenciar la expresión de cada paciente.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 7h6l2 3h8"></path><path d="M4 17h6l2-3h8"></path><path d="M4 7v10"></path><path d="M20 10v4"></path></svg>
+            <svg viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path><path d="M2 21v-2a6 6 0 0 1 12 0v2"></path><path d="M16 11l2 2 4-4"></path><path d="M16 18h6"></path></svg>
           </div>
           <h3>Trabajo Social</h3>
-          <p>Articulación con instituciones y acompañamiento en procesos de inclusión social y educativa.</p>
+          <p>Acompañamiento integral a personas y familias, promoviendo el acceso a derechos, la inclusión social y educativa, y la articulación con instituciones, organismos y redes comunitarias para fortalecer los procesos de atención y apoyo.</p>
         </div>
         <div class="service-card">
           <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 5a4 4 0 0 1 4 4c0 3-4 7-4 7s-4-4-4-7a4 4 0 0 1 4-4z"></path><path d="M6 19h12"></path><path d="M9 22h6"></path></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z"></path><path d="M8 14h3l1-3 2 5 1-2h3"></path></svg>
           </div>
           <h3>Tratamientos Integrales</h3>
-          <p>Propuestas terapéuticas individualizadas que integran distintas disciplinas para un abordaje completo.</p>
+          <p>Brindamos tratamientos en Fonoaudiología, Psicología, Psicopedagogía y Estimulación Temprana, diseñando planes de intervención personalizados. Nuestro equipo trabaja de manera coordinada con la persona, su familia, la escuela y otros profesionales para favorecer un desarrollo integral y una mejor calidad de vida.</p>
         </div>
         <div class="service-card">
           <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M4 20v-2a4 4 0 0 1 8 0v2"></path><path d="M12 20v-2a4 4 0 0 1 8 0v2"></path></svg>
+            <svg viewBox="0 0 24 24"><path d="M7 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M17 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M3 21v-2a4 4 0 0 1 8 0v2"></path><path d="M13 21v-2a4 4 0 0 1 8 0v2"></path><path d="M9 13h6"></path></svg>
           </div>
-          <h3>Orientación</h3>
-          <p>Espacios de acompañamiento y orientación para padres y cuidadores en cada etapa del proceso.</p>
+          <h3>Orientación a Familias</h3>
+          <p>Acompañamos a las familias durante todo el proceso terapéutico, brindando asesoramiento, contención y estrategias para abordar las situaciones que surgen en la vida cotidiana. Promovemos una participación activa de los adultos responsables, fortaleciendo el trabajo conjunto entre la familia, el equipo terapéutico y las instituciones.</p>
         </div>
       </div>
     </div>
@@ -1267,10 +1327,14 @@
           <div class="mv__card__label">Misión</div>
           <h3>Nuestro propósito</h3>
           <p>
-            Somos un espacio terapéutico y educativo que acompaña a niños, niñas y adolescentes
-            en sus procesos de desarrollo e integración, creando oportunidades de aprendizaje,
-            inclusión y crecimiento, respetando los tiempos, la singularidad y el contexto
-            de cada persona.
+            Promover el desarrollo integral de niños, adolescentes y adultos mediante evaluaciones
+            diagnósticas, tratamientos interdisciplinarios y apoyos personalizados que favorezcan
+            su participación activa en los distintos ámbitos de la vida.
+          </p>
+          <p>
+            Trabajamos para potenciar las capacidades de cada persona, acompañando a las familias
+            y articulando con las instituciones educativas y comunitarias, contribuyendo a la
+            construcción de entornos más accesibles, inclusivos y respetuosos de la diversidad.
           </p>
           <div class="mv__deco"></div>
         </div>
@@ -1280,9 +1344,13 @@
           <div class="mv__card__label">Visión</div>
           <h3>Hacia dónde vamos</h3>
           <p>
-            Ser un centro de referencia en integración escolar y acompañamiento terapéutico,
-            reconocido por su mirada integral, su compromiso ético y su capacidad de crear
-            procesos de inclusión sostenibles y significativos junto a las instituciones educativas.
+            Ser un centro de referencia en evaluación, rehabilitación e inclusión, reconocido
+            por la excelencia profesional, el compromiso ético y la calidad de sus intervenciones.
+          </p>
+          <p>
+            Aspiramos a contribuir a una sociedad donde la diversidad sea valorada, las barreras
+            para la participación sean progresivamente eliminadas y todas las personas puedan
+            ejercer plenamente sus derechos y desarrollar su máximo potencial.
           </p>
           <div class="mv__deco"></div>
         </div>
@@ -1301,37 +1369,47 @@
     <div class="container">
       <div class="why__inner">
         <div>
-          <div class="badge">Por qué elegirnos</div>
-          <h2 class="section-title">Una atención diferente,<br>centrada en la persona</h2>
-          <p class="section-lead">Integramos diagnóstico, tratamiento e inclusión escolar en un solo lugar.</p>
+          <div class="badge">¿Por qué elegir CREAR?</div>
+          <h2 class="section-title">Una atención integral<br>centrada en la persona</h2>
+          <p class="section-lead">
+            Creemos que cada proceso requiere una mirada completa. Por eso integramos evaluación,
+            tratamiento, orientación familiar e inclusión educativa dentro de un mismo proyecto terapéutico.
+          </p>
 
           <div class="why__features">
             <div class="why__feat">
-              <div class="why__feat-icon">🎯</div>
+              <div class="why__feat-icon">🧠</div>
               <div class="why__feat-body">
-                <h4>Enfoque integral</h4>
-                <p>Evaluamos y tratamos al niño en todas sus dimensiones: cognitiva, emocional, social y educativa.</p>
+                <h4>Evaluación especializada</h4>
+                <p>Realizamos evaluaciones diagnósticas mediante herramientas estandarizadas y protocolos reconocidos internacionalmente, como ADOS-2, ADI-R, evaluaciones neuropsicológicas, neurocognitivas y neurolingüísticas, orientando intervenciones precisas y personalizadas.</p>
               </div>
             </div>
             <div class="why__feat">
-              <div class="why__feat-icon">🔬</div>
+              <div class="why__feat-icon">🤝</div>
               <div class="why__feat-body">
-                <h4>Diagnóstico preciso</h4>
-                <p>Utilizamos herramientas estandarizadas internacionalmente: ADOS, ADIR, evaluaciones neuropsicológicas y neurológicas.</p>
+                <h4>Equipo interdisciplinario</h4>
+                <p>Nuestro equipo integra Psicología, Psicopedagogía, Fonoaudiología, Terapia Ocupacional, Psicomotricidad, Trabajo Social, Integración Escolar y otras especialidades que trabajan de manera coordinada para alcanzar objetivos comunes.</p>
               </div>
             </div>
             <div class="why__feat">
               <div class="why__feat-icon">🏫</div>
               <div class="why__feat-body">
-                <h4>Articulación escolar</h4>
-                <p>Trabajamos en red con los establecimientos educativos para garantizar una inclusión real y sostenida.</p>
+                <h4>Inclusión educativa</h4>
+                <p>Acompañamos las trayectorias escolares articulando con docentes, equipos de orientación, directivos y familias para favorecer la participación, el aprendizaje y la permanencia en la escuela.</p>
               </div>
             </div>
             <div class="why__feat">
               <div class="why__feat-icon">💛</div>
               <div class="why__feat-body">
-                <h4>Calidez humana</h4>
-                <p>Cada consulta encuentra en CREAR un espacio de escucha, respeto y acompañamiento genuino.</p>
+                <h4>Acompañamiento a las familias</h4>
+                <p>Brindamos espacios de orientación, escucha y seguimiento, fortaleciendo el rol de las familias como protagonistas fundamentales en cada proceso terapéutico.</p>
+              </div>
+            </div>
+            <div class="why__feat">
+              <div class="why__feat-icon">⚖️</div>
+              <div class="why__feat-body">
+                <h4>Enfoque basado en derechos</h4>
+                <p>Nuestro trabajo se sustenta en el modelo social de la discapacidad y en la Convención sobre los Derechos de las Personas con Discapacidad, promoviendo la autonomía, la participación y la igualdad de oportunidades.</p>
               </div>
             </div>
           </div>
@@ -1339,27 +1417,36 @@
 
         <div class="why__visual">
           <h3>Nuestros pilares</h3>
-          <p>Los valores que guían cada decisión y cada acompañamiento</p>
           <div class="why__values">
             <div class="why__value">
-              <span class="v-icon">🎯</span>
-              <strong>Compromiso</strong>
-              <span>Con cada proceso</span>
-            </div>
-            <div class="why__value">
               <span class="v-icon">🤝</span>
-              <strong>Equipo</strong>
-              <span>Interdisciplinario</span>
+              <strong>Trabajo interdisciplinario</strong>
+              <span>Creemos en la construcción colectiva de estrategias entre profesionales, familias, escuelas e instituciones.</span>
             </div>
             <div class="why__value">
               <span class="v-icon">🏫</span>
               <strong>Inclusión</strong>
-              <span>Real y sostenida</span>
+              <span>Promovemos la participación plena de cada persona en los ámbitos educativos, familiares y comunitarios.</span>
+            </div>
+            <div class="why__value">
+              <span class="v-icon">⚖️</span>
+              <strong>Enfoque de derechos</strong>
+              <span>Reconocemos a cada persona como sujeto pleno de derechos, respetando su autonomía, dignidad y singularidad.</span>
+            </div>
+            <div class="why__value">
+              <span class="v-icon">🌱</span>
+              <strong>Desarrollo integral</strong>
+              <span>Acompañamos todas las dimensiones del desarrollo: cognitiva, emocional, comunicativa, social, funcional y ocupacional.</span>
             </div>
             <div class="why__value">
               <span class="v-icon">💛</span>
-              <strong>Calidez</strong>
-              <span>En cada encuentro</span>
+              <strong>Calidez humana</strong>
+              <span>Construimos vínculos basados en la escucha, el respeto, la cercanía y el compromiso.</span>
+            </div>
+            <div class="why__value">
+              <span class="v-icon">⭐</span>
+              <strong>Calidad y compromiso</strong>
+              <span>Sostenemos intervenciones éticas, basadas en evidencia científica y en la formación continua de nuestro equipo.</span>
             </div>
           </div>
         </div>
@@ -1387,7 +1474,7 @@
               <path d="M9 12h6"/>
             </svg>
           </div>
-          <h4>Evaluación Neuropsicológica</h4>
+          <h4>Evaluación Neurocognitiva</h4>
         </div>
         <div class="eval__item">
           <div class="icon">
@@ -1398,7 +1485,7 @@
               <path d="M10.5 8.5v4"/>
             </svg>
           </div>
-          <h4>Evaluación Neurológica</h4>
+          <h4>Evaluación Neurolingüística</h4>
         </div>
         <div class="eval__item">
           <div class="icon">
@@ -1408,7 +1495,7 @@
               <path d="M9 13h4"/>
             </svg>
           </div>
-          <h4>Evaluación Fonoaudiológica</h4>
+          <h4>ADOS-2 - ADI-R</h4>
         </div>
         <div class="eval__item">
           <div class="icon">
@@ -1419,7 +1506,7 @@
               <path d="M8.5 15h5"/>
             </svg>
           </div>
-          <h4>ADOS · ADIR</h4>
+          <h4>Evaluación Neuropsicológica</h4>
         </div>
         <div class="eval__item">
           <div class="icon">
@@ -1430,7 +1517,7 @@
               <path d="M8 11h7"/>
             </svg>
           </div>
-          <h4>Aprendizaje Escolar</h4>
+          <h4>Psicodiagnóstico</h4>
         </div>
         <div class="eval__item">
           <div class="icon">
@@ -1440,7 +1527,7 @@
               <path d="M8 10.5h5"/>
             </svg>
           </div>
-          <h4>Comunicación y Lenguaje</h4>
+          <h4>Evaluaciones Funcionales para orientación terapéutica</h4>
         </div>
       </div>
     </div>
@@ -1491,6 +1578,19 @@
             </div>
           </div>
 
+          <!-- Email -->
+          <div class="contact__item">
+            <div class="contact__item-icon contact__item-icon--mail">
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 5h16c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2zm0 2v.4l8 5.1 8-5.1V7H4zm16 10V9.8l-7.45 4.75a1 1 0 0 1-1.1 0L4 9.8V17h16z"/>
+              </svg>
+            </div>
+            <div class="contact__item-body">
+              <strong>Email</strong>
+              <span><a href="mailto:info@centrocrear.com.ar">info@centrocrear.com.ar</a></span>
+            </div>
+          </div>
+
           <!-- Instagram -->
           <div class="contact__item">
             <div class="contact__item-icon contact__item-icon--ig">
@@ -1533,7 +1633,7 @@
         </div>
 
         <div class="contact__form">
-          <h3>Consultá por un turno</h3>
+          <h3>Estamos para ayudarte</h3>
           <form onsubmit="handleForm(event)">
             <div class="form-row">
               <div class="form-group">
@@ -1558,13 +1658,16 @@
               <select>
                 <option value="">Seleccioná una opción</option>
                 <option>Apoyo a la integración escolar (SAIE)</option>
+                <option>Evaluación neurocognitiva</option>
+                <option>Evaluación neurolingüística</option>
+                <option>ADOS-2 - ADI-R</option>
                 <option>Evaluación neuropsicológica</option>
-                <option>Evaluación neurológica</option>
-                <option>Evaluación fonoaudiológica</option>
-                <option>ADOS / ADIR</option>
+                <option>Psicodiagnóstico</option>
+                <option>Evaluaciones funcionales para orientación terapéutica</option>
                 <option>Trabajo social</option>
                 <option>Orientación</option>
                 <option>Tratamiento integral</option>
+                <option>Otros</option>
               </select>
             </div>
             <div class="form-group">
@@ -1572,7 +1675,7 @@
               <textarea placeholder="Contanos brevemente el motivo de la consulta…"></textarea>
             </div>
             <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">
-              Enviar consulta →
+              Enviar mensaje
             </button>
           </form>
         </div>
@@ -1696,20 +1799,23 @@
         <div class="footer__col">
           <h4>Servicios</h4>
           <ul>
-            <li><a href="#servicios">Integración Escolar</a></li>
-            <li><a href="#servicios">Neuropsicología</a></li>
-            <li><a href="#servicios">Fonoaudiología</a></li>
+            <li><a href="#servicios">Apoyo a la Integración Escolar</a></li>
+            <li><a href="#servicios">Evaluaciones de Diagnóstico</a></li>
             <li><a href="#servicios">Trabajo Social</a></li>
+            <li><a href="#servicios">Tratamientos Integrales</a></li>
+            <li><a href="#servicios">Orientación a Familias</a></li>
           </ul>
         </div>
 
         <div class="footer__col">
           <h4>Evaluaciones</h4>
           <ul>
+            <li><a href="#evaluaciones">Neurocognitiva</a></li>
+            <li><a href="#evaluaciones">Neurolingüística</a></li>
+            <li><a href="#evaluaciones">ADOS-2 - ADI-R</a></li>
             <li><a href="#evaluaciones">Neuropsicológica</a></li>
-            <li><a href="#evaluaciones">Neurológica</a></li>
-            <li><a href="#evaluaciones">Fonoaudiológica</a></li>
-            <li><a href="#evaluaciones">ADOS / ADIR</a></li>
+            <li><a href="#evaluaciones">Psicodiagnóstico</a></li>
+            <li><a href="#evaluaciones">Evaluaciones Funcionales</a></li>
           </ul>
         </div>
 
@@ -1763,12 +1869,21 @@
     </div>
   </div>
 
+  <div class="form-toast" id="formToast" role="status" aria-live="polite" aria-hidden="true">
+    <div class="form-toast__icon">✓</div>
+    <div>
+      <strong class="form-toast__title">Mensaje enviado</strong>
+      <span class="form-toast__text">Gracias por tu consulta. Recibimos tu mensaje y nos vamos a comunicar a la brevedad.</span>
+    </div>
+    <button class="form-toast__close" type="button" aria-label="Cerrar aviso">×</button>
+  </div>
+
   <!-- ══ WHATSAPP FLOTANTE ══════════════════════════════════════ -->
   <a class="wa-float" href="https://wa.me/5491158517587?text=Hola%2C%20quisiera%20consultar%20por%20un%20turno%20en%20CREAR" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
-    <span class="wa-float__text">Consultá por WhatsApp</span>
+    <span class="wa-float__text">Solicitar turno</span>
   </a>
 
   <script>
@@ -1808,17 +1923,54 @@
       if (e.key === 'Escape' && brandModal.classList.contains('is-open')) closeBrandModal();
     });
 
-    // Form → WhatsApp
+    const formToast = document.getElementById('formToast');
+    let formToastTimer;
+
+    function hideFormToast() {
+      if (!formToast) return;
+      formToast.classList.remove('is-visible');
+      formToast.setAttribute('aria-hidden', 'true');
+      clearTimeout(formToastTimer);
+    }
+
+    function showFormToast() {
+      if (!formToast) return;
+      clearTimeout(formToastTimer);
+      formToast.classList.add('is-visible');
+      formToast.setAttribute('aria-hidden', 'false');
+      formToastTimer = setTimeout(hideFormToast, 5000);
+    }
+
+    if (formToast) {
+      formToast.addEventListener('click', hideFormToast);
+      const formToastClose = formToast.querySelector('.form-toast__close');
+      formToastClose.addEventListener('click', e => {
+        e.stopPropagation();
+        hideFormToast();
+      });
+    }
+
+    // Form → Email
     function handleForm(e) {
       e.preventDefault();
       const form    = e.target;
-      const name    = form.querySelectorAll('input[type="text"]')[0].value;
-      const phone   = form.querySelector('input[type="tel"]').value;
+      const textInputs = form.querySelectorAll('input[type="text"]');
+      const name    = textInputs[0].value.trim();
+      const surname = textInputs[1].value.trim();
+      const phone   = form.querySelector('input[type="tel"]').value.trim();
+      const email   = form.querySelector('input[type="email"]').value.trim();
       const service = form.querySelector('select').value || 'consulta general';
-      const msg = encodeURIComponent(
-        `Hola! Soy ${name}, quisiera consultar sobre: ${service}. Mi teléfono es ${phone}.`
+      const message = form.querySelector('textarea').value.trim() || 'Sin mensaje adicional.';
+      const subject = encodeURIComponent(`Consulta desde la web - ${name} ${surname}`);
+      const body = encodeURIComponent(
+        `Nombre: ${name} ${surname}\n` +
+        `Teléfono / WhatsApp: ${phone}\n` +
+        `Correo electrónico: ${email || 'No informado'}\n` +
+        `Servicio de interés: ${service}\n\n` +
+        `Mensaje:\n${message}`
       );
-      window.open(`https://wa.me/5491158517587?text=${msg}`, '_blank');
+      showFormToast();
+      window.location.href = `mailto:info@centrocrear.com.ar?subject=${subject}&body=${body}`;
     }
 
     // About image carousel
