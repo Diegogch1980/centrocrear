@@ -314,31 +314,63 @@
     }
     .service-card {
       position: relative;
+      min-height: 165px;
+      perspective: 1100px;
+      border-radius: 16px;
+      outline: none;
+    }
+    .service-card:focus-visible .service-card__face {
+      outline: 3px solid rgba(58,175,168,.34);
+      outline-offset: 4px;
+    }
+    .service-card__inner {
+      position: relative;
+      width: 100%;
+      min-height: 165px;
+      transform-style: preserve-3d;
+      transition: transform .65s ease;
+    }
+    .service-card:hover .service-card__inner,
+    .service-card:focus-within .service-card__inner {
+      transform: rotateY(180deg);
+    }
+    .service-card__face {
+      position: absolute;
+      inset: 0;
+      min-height: 165px;
       overflow: hidden;
-      min-height: 210px;
+      border-radius: 16px;
+      padding: 16px 18px;
+      backface-visibility: hidden;
+      border: 1px solid rgba(58,175,168,.48);
+      box-shadow: 0 12px 30px rgba(30,42,53,.075);
       background:
         linear-gradient(120deg, rgba(255,255,255,.32) 0%, rgba(255,255,255,0) 42%),
         linear-gradient(145deg, rgba(58,175,168,.58) 0%, rgba(58,175,168,.22) 58%, rgba(255,255,255,.94) 100%);
-      border: 1px solid rgba(58,175,168,.48);
-      border-radius: 16px;
-      padding: 26px 24px 24px;
-      box-shadow: 0 12px 30px rgba(30,42,53,.075);
-      transition: transform .25s, box-shadow .25s, border-color .25s, background .25s;
     }
-    .service-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(58,175,168,.42);
+    .service-card__front {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .service-card__back {
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+    }
+    .service-card:hover .service-card__face,
+    .service-card:focus-within .service-card__face {
       box-shadow: 0 20px 46px rgba(30,42,53,.12);
     }
-    .service-card:nth-child(2),
-    .service-card:nth-child(6) {
+    .service-card:nth-child(2) .service-card__face,
+    .service-card:nth-child(6) .service-card__face {
       background:
         linear-gradient(120deg, rgba(255,255,255,.32) 0%, rgba(255,255,255,0) 42%),
         linear-gradient(145deg, rgba(240,122,64,.6) 0%, rgba(240,122,64,.24) 58%, rgba(255,255,255,.94) 100%);
       border-color: rgba(240,122,64,.52);
     }
-    .service-card:nth-child(3),
-    .service-card:nth-child(4) {
+    .service-card:nth-child(3) .service-card__face,
+    .service-card:nth-child(4) .service-card__face {
       background:
         linear-gradient(120deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,0) 42%),
         linear-gradient(145deg, rgba(235,197,90,.72) 0%, rgba(235,197,90,.32) 58%, rgba(255,255,255,.94) 100%);
@@ -376,7 +408,7 @@
       box-shadow: 0 8px 20px rgba(235,197,90,.14);
     }
     .service-card h3 { font-size: 1.02rem; font-weight: 900; margin-bottom: 9px; letter-spacing: .01em; color: #172B34; }
-    .service-card p  { font-size: .94rem; color: #334155; line-height: 1.65; }
+    .service-card p  { font-size: .86rem; color: #334155; line-height: 1.45; }
 
     /* ── ABOUT ───────────────────────────────────────────────── */
     .about__inner {
@@ -550,15 +582,19 @@
     .eval__item {
       position: relative;
       overflow: hidden;
+      min-height: 92px;
       background:
         linear-gradient(120deg, rgba(255,255,255,.32) 0%, rgba(255,255,255,0) 42%),
         linear-gradient(145deg, rgba(58,175,168,.56) 0%, rgba(58,175,168,.2) 58%, rgba(255,255,255,.95) 100%);
       border: 1px solid rgba(58,175,168,.46);
       border-radius: 16px;
-      padding: 25px 20px 23px;
+      padding: 20px 18px;
       text-align: center;
       box-shadow: 0 12px 30px rgba(30,42,53,.075);
       transition: transform .25s, box-shadow .25s, border-color .25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .eval__item:nth-child(2),
     .eval__item:nth-child(6) {
@@ -578,41 +614,7 @@
       transform: translateY(-5px);
       box-shadow: 0 20px 46px rgba(30,42,53,.12);
     }
-    .eval__item .icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 14px;
-      color: var(--teal);
-      background: rgba(255,255,255,.9);
-      border: 1px solid rgba(255,255,255,.72);
-      box-shadow: 0 10px 24px rgba(30,42,53,.12);
-    }
-    .eval__item .icon svg {
-      width: 25px;
-      height: 25px;
-      stroke: currentColor;
-      stroke-width: 2;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .eval__item:nth-child(2) .icon,
-    .eval__item:nth-child(6) .icon {
-      color: var(--orange);
-      border-color: rgba(240,122,64,.24);
-      box-shadow: 0 8px 20px rgba(240,122,64,.12);
-    }
-    .eval__item:nth-child(3) .icon,
-    .eval__item:nth-child(4) .icon {
-      color: #B88710;
-      border-color: rgba(235,197,90,.34);
-      box-shadow: 0 8px 20px rgba(235,197,90,.14);
-    }
-    .eval__item h4 { font-size: .96rem; font-weight: 850; color: #172B34; }
+    .eval__item h4 { font-size: .96rem; font-weight: 850; color: #172B34; line-height: 1.25; }
 
     /* ── CONTACT ─────────────────────────────────────────────── */
     .contact__inner {
@@ -1116,6 +1118,18 @@
 
       /* Why */
       .why__inner { grid-template-columns: 1fr; gap: 32px; }
+      .why__values { grid-template-columns: 1fr; }
+      .why__value {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+      }
+      .why__value .v-icon {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      .why__value strong { line-height: 1.25; }
 
       /* Mission / Vision */
       .mv__grid { grid-template-columns: 1fr; gap: 20px; }
@@ -1236,40 +1250,83 @@
       </p>
 
       <div class="services__grid">
-        <div class="service-card">
-          <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 21V8l8-5 8 5v13"></path><path d="M9 21v-7h6v7"></path><path d="M9 10h.01"></path><path d="M15 10h.01"></path></svg>
+        <div class="service-card" tabindex="0">
+          <div class="service-card__inner">
+            <div class="service-card__face service-card__front">
+              <div class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 20V7l8-4 8 4v13"></path><path d="M8 20v-6h8v6"></path><path d="M8 10h8"></path><path d="M10 7h4"></path><path d="M3 20h18"></path></svg>
+              </div>
+              <h3>Apoyo a la Integración Escolar</h3>
+            </div>
+            <div class="service-card__face service-card__back">
+              <p>Acompañamos los procesos de inclusión escolar mediante apoyos personalizados, articulando con la escuela, la familia y el equipo terapéutico para favorecer la participación del estudiante.</p>
+            </div>
           </div>
-          <h3>Apoyo a la Integración Escolar</h3>
-          <p>Servicio SAIE para acompañar al niño dentro del aula y coordinar con los docentes un proyecto educativo inclusivo.</p>
         </div>
-        <div class="service-card">
-          <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M9 3h6l4 4v14H5V3h4z"></path><path d="M14 3v5h5"></path><path d="M8 13h8"></path><path d="M8 17h5"></path><path d="M9 8h1"></path></svg>
+        <div class="service-card" tabindex="0">
+          <div class="service-card__inner">
+            <div class="service-card__face service-card__front">
+              <div class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 4h6"></path><path d="M10 2h4l1 2h3v18H6V4h3z"></path><path d="M9 10h6"></path><path d="M9 14h3"></path><circle cx="16.5" cy="16.5" r="2.5"></circle><path d="m18.5 18.5 2.5 2.5"></path></svg>
+              </div>
+              <h3>Evaluaciones de Diagnóstico</h3>
+            </div>
+            <div class="service-card__face service-card__back">
+              <p>Realizamos evaluaciones interdisciplinarias para comprender las necesidades de cada persona y orientar el diagnóstico, los apoyos y el tratamiento más adecuado.</p>
+            </div>
           </div>
-          <h3>Evaluaciones de Diagnóstico</h3>
-          <p>Realizamos evaluaciones diagnósticas integrales para niños, adolescentes y adultos, utilizando herramientas estandarizadas y entrevistas clínicas que permiten comprender el funcionamiento cognitivo, comunicativo, conductual y socioemocional. Los resultados orientan el diagnóstico, la definición de apoyos y la planificación del tratamiento más adecuado.</p>
         </div>
-        <div class="service-card">
-          <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path><path d="M2 21v-2a6 6 0 0 1 12 0v2"></path><path d="M16 11l2 2 4-4"></path><path d="M16 18h6"></path></svg>
+        <div class="service-card" tabindex="0">
+          <div class="service-card__inner">
+            <div class="service-card__face service-card__front">
+              <div class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M3 21v-2a4 4 0 0 1 8 0v2"></path><path d="M14 8h6"></path><path d="M14 12h5"></path><path d="M14 16h4"></path><path d="M17 20l3-3"></path></svg>
+              </div>
+              <h3>Trabajo Social</h3>
+            </div>
+            <div class="service-card__face service-card__back">
+              <p>Brindamos orientación y acompañamiento a las familias, facilitando el acceso a recursos, derechos y redes comunitarias que favorecen la inclusión y el bienestar.</p>
+            </div>
           </div>
-          <h3>Trabajo Social</h3>
-          <p>Acompañamiento integral a personas y familias, promoviendo el acceso a derechos, la inclusión social y educativa, y la articulación con instituciones, organismos y redes comunitarias para fortalecer los procesos de atención y apoyo.</p>
         </div>
-        <div class="service-card">
-          <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z"></path><path d="M8 14h3l1-3 2 5 1-2h3"></path></svg>
+        <div class="service-card" tabindex="0">
+          <div class="service-card__inner">
+            <div class="service-card__face service-card__front">
+              <div class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 21s-6-3.8-6-8.5A4 4 0 0 1 12 9a4 4 0 0 1 6 3.5C18 17.2 12 21 12 21z"></path><path d="M9 14h2l1-3 2 5 1-2h2"></path><path d="M12 3v3"></path><path d="M9 4.5h6"></path></svg>
+              </div>
+              <h3>Tratamientos Integrales</h3>
+            </div>
+            <div class="service-card__face service-card__back">
+              <p>Ofrecemos tratamientos en Psicología, Psicopedagogía, Fonoaudiología y Estimulación Temprana, con abordajes personalizados y trabajo interdisciplinario.</p>
+            </div>
           </div>
-          <h3>Tratamientos Integrales</h3>
-          <p>Brindamos tratamientos en Fonoaudiología, Psicología, Psicopedagogía y Estimulación Temprana, diseñando planes de intervención personalizados. Nuestro equipo trabaja de manera coordinada con la persona, su familia, la escuela y otros profesionales para favorecer un desarrollo integral y una mejor calidad de vida.</p>
         </div>
-        <div class="service-card">
-          <div class="service-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M17 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M3 21v-2a4 4 0 0 1 8 0v2"></path><path d="M13 21v-2a4 4 0 0 1 8 0v2"></path><path d="M9 13h6"></path></svg>
+        <div class="service-card" tabindex="0">
+          <div class="service-card__inner">
+            <div class="service-card__face service-card__front">
+              <div class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M16 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M4 21v-2a4 4 0 0 1 8 0v2"></path><path d="M12 21v-2a4 4 0 0 1 8 0v2"></path><path d="M12 13l-2 2"></path><path d="M12 13l2 2"></path></svg>
+              </div>
+              <h3>Orientación a Familias</h3>
+            </div>
+            <div class="service-card__face service-card__back">
+              <p>Acompañamos a las familias con espacios de orientación y asesoramiento, fortaleciendo su participación activa durante todo el proceso terapéutico.</p>
+            </div>
           </div>
-          <h3>Orientación a Familias</h3>
-          <p>Acompañamos a las familias durante todo el proceso terapéutico, brindando asesoramiento, contención y estrategias para abordar las situaciones que surgen en la vida cotidiana. Promovemos una participación activa de los adultos responsables, fortaleciendo el trabajo conjunto entre la familia, el equipo terapéutico y las instituciones.</p>
+        </div>
+        <div class="service-card" tabindex="0">
+          <div class="service-card__inner">
+            <div class="service-card__face service-card__front">
+              <div class="service-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><circle cx="5" cy="6" r="2"></circle><circle cx="19" cy="6" r="2"></circle><circle cx="5" cy="18" r="2"></circle><circle cx="19" cy="18" r="2"></circle><path d="M7 7.5 10 10"></path><path d="m14 10 3-2.5"></path><path d="m10 14-3 2.5"></path><path d="m14 14 3 2.5"></path></svg>
+              </div>
+              <h3>Abordaje Interdisciplinario</h3>
+            </div>
+            <div class="service-card__face service-card__back">
+              <p>El trabajo coordinado entre las distintas disciplinas es el eje de nuestra propuesta. Compartimos objetivos, planificamos en equipo y articulamos con la familia y la escuela para ofrecer intervenciones integrales y centradas en cada persona.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1327,14 +1384,10 @@
           <div class="mv__card__label">Misión</div>
           <h3>Nuestro propósito</h3>
           <p>
-            Promover el desarrollo integral de niños, adolescentes y adultos mediante evaluaciones
-            diagnósticas, tratamientos interdisciplinarios y apoyos personalizados que favorezcan
-            su participación activa en los distintos ámbitos de la vida.
-          </p>
-          <p>
-            Trabajamos para potenciar las capacidades de cada persona, acompañando a las familias
-            y articulando con las instituciones educativas y comunitarias, contribuyendo a la
-            construcción de entornos más accesibles, inclusivos y respetuosos de la diversidad.
+            Acompañar el desarrollo integral de niños, adolescentes y adultos mediante evaluaciones,
+            tratamientos interdisciplinarios y apoyos personalizados, promoviendo su participación
+            plena en la vida cotidiana. Trabajamos junto a las familias, las escuelas y la comunidad
+            para construir entornos más inclusivos y accesibles.
           </p>
           <div class="mv__deco"></div>
         </div>
@@ -1345,12 +1398,9 @@
           <h3>Hacia dónde vamos</h3>
           <p>
             Ser un centro de referencia en evaluación, rehabilitación e inclusión, reconocido
-            por la excelencia profesional, el compromiso ético y la calidad de sus intervenciones.
-          </p>
-          <p>
-            Aspiramos a contribuir a una sociedad donde la diversidad sea valorada, las barreras
-            para la participación sean progresivamente eliminadas y todas las personas puedan
-            ejercer plenamente sus derechos y desarrollar su máximo potencial.
+            por la calidad humana y profesional de su equipo. Aspiramos a una sociedad donde
+            todas las personas tengan las mismas oportunidades para desarrollarse y participar
+            plenamente.
           </p>
           <div class="mv__deco"></div>
         </div>
@@ -1372,8 +1422,8 @@
           <div class="badge">¿Por qué elegir CREAR?</div>
           <h2 class="section-title">Una atención integral<br>centrada en la persona</h2>
           <p class="section-lead">
-            Creemos que cada proceso requiere una mirada completa. Por eso integramos evaluación,
-            tratamiento, orientación familiar e inclusión educativa dentro de un mismo proyecto terapéutico.
+            Abordamos cada proceso desde una mirada interdisciplinaria, integrando evaluación,
+            tratamiento, familia e inclusión educativa.
           </p>
 
           <div class="why__features">
@@ -1381,35 +1431,35 @@
               <div class="why__feat-icon">🧠</div>
               <div class="why__feat-body">
                 <h4>Evaluación especializada</h4>
-                <p>Realizamos evaluaciones diagnósticas mediante herramientas estandarizadas y protocolos reconocidos internacionalmente, como ADOS-2, ADI-R, evaluaciones neuropsicológicas, neurocognitivas y neurolingüísticas, orientando intervenciones precisas y personalizadas.</p>
+                <p>Realizamos evaluaciones diagnósticas con herramientas estandarizadas para orientar intervenciones precisas y personalizadas.</p>
               </div>
             </div>
             <div class="why__feat">
               <div class="why__feat-icon">🤝</div>
               <div class="why__feat-body">
                 <h4>Equipo interdisciplinario</h4>
-                <p>Nuestro equipo integra Psicología, Psicopedagogía, Fonoaudiología, Terapia Ocupacional, Psicomotricidad, Trabajo Social, Integración Escolar y otras especialidades que trabajan de manera coordinada para alcanzar objetivos comunes.</p>
+                <p>Profesionales de distintas especialidades trabajan de forma coordinada para brindar una atención integral.</p>
               </div>
             </div>
             <div class="why__feat">
               <div class="why__feat-icon">🏫</div>
               <div class="why__feat-body">
                 <h4>Inclusión educativa</h4>
-                <p>Acompañamos las trayectorias escolares articulando con docentes, equipos de orientación, directivos y familias para favorecer la participación, el aprendizaje y la permanencia en la escuela.</p>
+                <p>Articulamos con escuelas y familias para favorecer la participación, el aprendizaje y la trayectoria escolar.</p>
               </div>
             </div>
             <div class="why__feat">
               <div class="why__feat-icon">💛</div>
               <div class="why__feat-body">
                 <h4>Acompañamiento a las familias</h4>
-                <p>Brindamos espacios de orientación, escucha y seguimiento, fortaleciendo el rol de las familias como protagonistas fundamentales en cada proceso terapéutico.</p>
+                <p>Ofrecemos orientación y seguimiento, fortaleciendo el rol de la familia en cada proceso.</p>
               </div>
             </div>
             <div class="why__feat">
               <div class="why__feat-icon">⚖️</div>
               <div class="why__feat-body">
                 <h4>Enfoque basado en derechos</h4>
-                <p>Nuestro trabajo se sustenta en el modelo social de la discapacidad y en la Convención sobre los Derechos de las Personas con Discapacidad, promoviendo la autonomía, la participación y la igualdad de oportunidades.</p>
+                <p>Promovemos la inclusión, la autonomía y la igualdad de oportunidades desde una perspectiva de derechos.</p>
               </div>
             </div>
           </div>
@@ -1459,68 +1509,21 @@
       </p>
       <div class="eval__grid">
         <div class="eval__item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M9 3a3 3 0 0 0-3 3v1.2A3.8 3.8 0 0 0 3 11v4a4 4 0 0 0 4 4h1"/>
-              <path d="M15 3a3 3 0 0 1 3 3v1.2a3.8 3.8 0 0 1 3 3.8v4a4 4 0 0 1-4 4h-1"/>
-              <path d="M9 7v14"/>
-              <path d="M15 7v14"/>
-              <path d="M9 12h6"/>
-            </svg>
-          </div>
           <h4>Evaluación Neurocognitiva</h4>
         </div>
         <div class="eval__item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="10.5" cy="10.5" r="6.5"/>
-              <path d="m16 16 5 5"/>
-              <path d="M8.5 10.5h4"/>
-              <path d="M10.5 8.5v4"/>
-            </svg>
-          </div>
           <h4>Evaluación Neurolingüística</h4>
         </div>
         <div class="eval__item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 10a7 7 0 0 1 14 0v1a7 7 0 0 1-7 7H8l-4 3 1.2-4.2A7 7 0 0 1 5 11z"/>
-              <path d="M9 10h6"/>
-              <path d="M9 13h4"/>
-            </svg>
-          </div>
           <h4>ADOS-2 - ADI-R</h4>
         </div>
         <div class="eval__item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M8 4h8l1 2h2v15H5V6h2z"/>
-              <path d="M9 4h6"/>
-              <path d="M8.5 11h7"/>
-              <path d="M8.5 15h5"/>
-            </svg>
-          </div>
           <h4>Evaluación Neuropsicológica</h4>
         </div>
         <div class="eval__item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H7a3 3 0 0 0-3 3z"/>
-              <path d="M4 5.5v14"/>
-              <path d="M8 7h8"/>
-              <path d="M8 11h7"/>
-            </svg>
-          </div>
           <h4>Psicodiagnóstico</h4>
         </div>
         <div class="eval__item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 6.5A4.5 4.5 0 0 1 8.5 2h7A4.5 4.5 0 0 1 20 6.5v4A4.5 4.5 0 0 1 15.5 15H13l-5 4v-4A4.5 4.5 0 0 1 4 10.5z"/>
-              <path d="M8 7.5h8"/>
-              <path d="M8 10.5h5"/>
-            </svg>
-          </div>
           <h4>Evaluaciones Funcionales para orientación terapéutica</h4>
         </div>
       </div>
@@ -1798,6 +1801,7 @@
             <li><a href="#servicios">Trabajo Social</a></li>
             <li><a href="#servicios">Tratamientos Integrales</a></li>
             <li><a href="#servicios">Orientación a Familias</a></li>
+            <li><a href="#servicios">Abordaje Interdisciplinario</a></li>
           </ul>
         </div>
 
